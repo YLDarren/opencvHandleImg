@@ -73,7 +73,7 @@ public class ImageUtils {
 		return mat.rows();
 	}
 	
-	public int getHeight(Mat src) {
+	public static int getHeight(Mat src) {
 		return src.rows();
 	}
 	
@@ -86,7 +86,7 @@ public class ImageUtils {
 		return mat.cols();
 	}
 	
-	public int getWidth(Mat src) {
+	public static int getWidth(Mat src) {
 		return src.cols();
 	}
 	/**
@@ -101,7 +101,7 @@ public class ImageUtils {
 		return (int) mat.get(y, x)[0];
 	}
 
-	public int getPixel(Mat src, int y, int x) {
+	public static int getPixel(Mat src, int y, int x) {
 		// 我们处理的是单通道灰度图
 		return (int) src.get(y, x)[0];
 	}
@@ -118,7 +118,7 @@ public class ImageUtils {
 		mat.put(y, x, color);
 	}
 
-	public void setPixel(Mat src, int y, int x, int color) {
+	public static void setPixel(Mat src, int y, int x, int color) {
 		src.put(y, x, color);
 	}
 
@@ -132,7 +132,7 @@ public class ImageUtils {
 		return Imgcodecs.imwrite(filename, mat);
 	}
 
-	public boolean saveImg(String filename, Mat src) {
+	public static boolean saveImg(String filename, Mat src) {
 		return Imgcodecs.imwrite(filename, src);
 	}
 
@@ -149,7 +149,7 @@ public class ImageUtils {
 		}
 	}
 
-	public Mat toGray(Mat src) {
+	public static Mat toGray(Mat src) {
 		Mat gray = new Mat();
 		if (src.channels() == 3) {
 			Imgproc.cvtColor(src, gray, Imgproc.COLOR_BGR2GRAY);
@@ -228,7 +228,7 @@ public class ImageUtils {
 		}
 	}
 
-	public Mat binaryzation(Mat src) {
+	public static Mat binaryzation(Mat src) {
 		int threshold = 0, threshold_new = 127;
 		int nWhite_count, nBlack_count;
 		int nWhite_sum, nBlack_sum;
@@ -345,12 +345,12 @@ public class ImageUtils {
 
 	}
 
-	public Mat navieRemoveNoise(Mat src , int pNum) {
+	public static Mat navieRemoveNoise(Mat src , int pNum) {
 		int i, j, m, n, nValue, nCount;
 		int nWidth = getWidth(src), nHeight = getHeight(src);
 
 		// 对图像的边缘进行预处理
-		src = this.StrokeWhite(src);
+		src = StrokeWhite(src);
 
 		// 如果一个点的周围都是白色的，而它确实黑色的，删除它
 		for (j = 1; j < nHeight - 1; ++j) {
@@ -442,7 +442,7 @@ public class ImageUtils {
 
 	}
 	
-	public Mat contoursRemoveNoise(Mat src , double pArea) {
+	public static Mat contoursRemoveNoise(Mat src , double pArea) {
 		int i, j, color = 1;
 		int nWidth = getWidth(src), nHeight = getHeight(src);
 
@@ -670,17 +670,17 @@ public class ImageUtils {
 	/**
 	 * 给单通道的图像边缘描边
 	 */
-	public Mat StrokeWhite(Mat src) {
+	public static Mat StrokeWhite(Mat src) {
 		
-		int i, nWidth = this.getWidth(src), nHeight = this.getHeight(src);
+		int i, nWidth = getWidth(src), nHeight = getHeight(src);
 		// 对图像的边缘进行预处理
 		for (i = 0; i < nWidth; ++i) {
-			this.setPixel(src , i, 0, WHITE);
-			this.setPixel(src, i, nHeight - 1, WHITE);
+			setPixel(src , i, 0, WHITE);
+			setPixel(src, i, nHeight - 1, WHITE);
 		}
 		for (i = 0; i < nHeight; ++i) {
-			this.setPixel(src, 0, i, WHITE);
-			this.setPixel(src, nWidth - 1, i, WHITE);
+			setPixel(src, 0, i, WHITE);
+			setPixel(src, nWidth - 1, i, WHITE);
 		}
 		
 		return src;

@@ -8,6 +8,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
+import utils.HandleImgUtils;
 import utils.ImageUtils;
 
 public class TestImageUtils {
@@ -39,10 +40,10 @@ public class TestImageUtils {
 		// img.saveImg(dest + "erodeDilateImg-" + imgFile.getName());
 
 		// 水平切割
-//		 List<Mat> list = img.cutImgX();
-//		 for(int i = 0 ; i < list.size() ; i++) {
-//			 Imgcodecs.imwrite(dest + "X-"+ i + imgFile.getName() , list.get(i) );
-//		 }
+		// List<Mat> list = img.cutImgX();
+		// for(int i = 0 ; i < list.size() ; i++) {
+		// Imgcodecs.imwrite(dest + "X-"+ i + imgFile.getName() , list.get(i) );
+		// }
 
 		// 垂直切割
 		List<Mat> list = img.cutImgY();
@@ -126,12 +127,62 @@ public class TestImageUtils {
 		img.toGray();
 
 		img.binaryzation();
-		
+
 		img.navieRemoveNoise(1);
-		
+
 		img.contoursRemoveNoise(1.0);
 
 		Imgcodecs.imwrite(dest + "removeNoise-" + imgFile.getName(), img.getMat());
 	}
 
+	@Test
+	public void testHandleImgUtils() {
+		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/X-1123.jpg");
+		String dest = "C:/Users/admin/Desktop/opencv/open/";
+
+		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
+
+		// 灰度化
+		mat = HandleImgUtils.gray(mat);
+		// 二值化
+		mat = HandleImgUtils.binaryzation(mat);
+
+		// 8邻域降噪
+		mat = HandleImgUtils.navieRemoveNoise(mat, 1);
+
+		// 连通域降噪
+		mat = HandleImgUtils.connectedRemoveNoise(mat, 1.0);
+
+		// HandleImgUtils.saveImg(mat, dest + "noise-" + imgFile.getName());
+
+		// 水平切割
+		// List<Mat> list = HandleImgUtils.cutImgX(mat);
+		// for(int i = 0 ; i < list.size() ; i++) {
+		// Imgcodecs.imwrite(dest + "X-"+ i + imgFile.getName() , list.get(i) );
+		// }
+
+		// 垂直切割
+		// List<Mat> list = HandleImgUtils.cutImgY(mat);
+		// for (int i = 0; i < list.size(); i++) {
+		// Imgcodecs.imwrite(dest + "Y" + i + imgFile.getName(), list.get(i));
+		// }
+
+	}
+
+	@Test
+	public void testHandleResize() {
+		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/Y1X-1123.jpg");
+		String dest = "C:/Users/admin/Desktop/opencv/open/";
+
+		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
+		
+		Imgcodecs.imwrite(dest + "resize-" + imgFile.getName(), HandleImgUtils.resize(mat));
+		
+	}
 }
