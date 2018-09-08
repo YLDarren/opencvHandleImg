@@ -428,9 +428,9 @@ public class HandleImgUtils {
 	 * @return
 	 */
 	public static Mat resize(Mat src) {
+		src =  trimImg(src);
 		src = gray(src);
 		src = binaryzation(src);
-		src = strokeWhite(src);
 		src = navieRemoveNoise(src, 1);
 		src = connectedRemoveNoise(src, 1.0);
 		Mat dst = new Mat();
@@ -438,7 +438,108 @@ public class HandleImgUtils {
 		Imgproc.resize(src, dst, dsize, 0, 0, Imgproc.INTER_AREA);
 		return dst;
 	}
-
+	
+	/**
+	 * 裁剪图像，主要使切割图像的内容更靠中间(即去除内容周边的空白)
+	 * 
+	 * @param src  Mat矩阵对象
+	 * @return
+	 */
+	public static Mat trimImg(Mat src) {
+		//定义具体内容开始的点
+		int startUp = 0 , startDown = 0 , startLeft = 0 , startRight = 0;
+		int width = getImgWidth(src) , height = getImgHeight(src);
+		startUp = confirmPositionUp(src , width , height);
+		startDown = confirmPositionDown(src , width , height);
+		startLeft = confirmPositionLeft(src , width , height);
+		startRight = confirmPositionRight(src , width , height);
+		startUp = startUp == 10 ? 0 : startUp - 10; 
+		startDown = height - startDown == 10 ? height : startDown + 10;
+		startLeft = startLeft == 10 ? 0 : startLeft - 10;
+		startRight = width - startRight == 10 ? width : startRight + 10;
+		//设置感兴趣的区域
+		Mat temp = new Mat(src, new Rect(startLeft , startUp, startRight - startLeft, startDown - startUp));
+		Mat t = new Mat();
+		temp.copyTo(t);
+		return t;
+	}
+	
+	/**
+	 * 确定图像内容startUp的位置
+	 * @param src Mat矩阵对象
+	 * @param width 图像的宽
+	 * @param height 图像的高
+	 * @return
+	 */
+	public static int confirmPositionUp(Mat src , int width , int  height) {
+		int i , j;
+		for(i = 10 ; i < height - 10 ; i++ ) {
+			for(j = 10 ; j < width - 10 ; j++) {
+				if(getPixel(src , i , j) != WHITE) {
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
+	
+	/**
+	 * 确定图像内容startDown的位置
+	 * @param src Mat矩阵对象
+	 * @param width 图像的宽
+	 * @param height 图像 的高
+	 * @return
+	 */
+	public static int confirmPositionDown(Mat src , int width , int  height) {
+		int i , j;
+		for(i = height - 10 ; i > 10 ; i-- ) {
+			for(j = 10 ; j < width - 10 ; j++) {
+				if(getPixel(src , i , j) != WHITE) {
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
+	
+	/**
+	 * 确定图像内容startLeft的位置
+	 * @param src Mat矩阵对象
+	 * @param width 图像的宽
+	 * @param height 图像的高
+	 * @return
+	 */
+	public static int confirmPositionLeft(Mat src , int width , int  height) {
+		int i , j;
+		for(i = 10 ; i < width - 10 ; i++ ) {
+			for(j = 10 ; j < height - 10 ; j++) {
+				if(getPixel(src , j , i) != WHITE) {
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
+	
+	/**
+	 * 确定图像内容startRight的位置
+	 * @param src Mat矩阵对象
+	 * @param width 图像的宽
+	 * @param height 图像的高
+	 * @return
+	 */
+	public static int confirmPositionRight(Mat src , int width , int  height) {
+		int i , j;
+		for(i = width - 10 ; i > 10 ; i-- ) {
+			for(j = height - 10 ; j > 10 ; j--) {
+				if(getPixel(src , j , i) != WHITE) {
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
+	
 	/**
 	 * 统计图像每行/每列黑色像素点的个数 (n1,n2)=>(height,width),b=true;统计每行
 	 * (n1,n2)=>(width,height),b=false;统计每列

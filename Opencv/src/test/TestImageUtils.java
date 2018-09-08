@@ -140,7 +140,7 @@ public class TestImageUtils {
 		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/X-1123.jpg");
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/Y2X-1123.jpg");
 		String dest = "C:/Users/admin/Desktop/opencv/open/";
 
 		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
@@ -150,13 +150,15 @@ public class TestImageUtils {
 		// 二值化
 		mat = HandleImgUtils.binaryzation(mat);
 
+		mat = HandleImgUtils.strokeWhite(mat);
+
 		// 8邻域降噪
 		mat = HandleImgUtils.navieRemoveNoise(mat, 1);
 
 		// 连通域降噪
-		mat = HandleImgUtils.connectedRemoveNoise(mat, 1.0);
+		mat = HandleImgUtils.connectedRemoveNoise(mat, 10.0);
 
-		// HandleImgUtils.saveImg(mat, dest + "noise-" + imgFile.getName());
+		HandleImgUtils.saveImg(mat, dest + "noise-" + imgFile.getName());
 
 		// 水平切割
 		// List<Mat> list = HandleImgUtils.cutImgX(mat);
@@ -177,12 +179,28 @@ public class TestImageUtils {
 		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/Y1X-1123.jpg");
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/Y5X-1123.jpg");
+		String dest = "C:/Users/admin/Desktop/opencv/open/";
+
+		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
+
+		Imgcodecs.imwrite(dest + "resize-" + imgFile.getName(), HandleImgUtils.resize(mat));
+
+	}
+
+	@Test
+	/**
+	 * 测试confirmPosition系列函数
+	 */
+	public void testConfirmPosition() {
+		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/Y0X-1123.jpg");
 		String dest = "C:/Users/admin/Desktop/opencv/open/";
 
 		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
 		
-		Imgcodecs.imwrite(dest + "resize-" + imgFile.getName(), HandleImgUtils.resize(mat));
-		
+		HandleImgUtils.trimImg(mat);
 	}
 }
