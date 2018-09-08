@@ -179,7 +179,7 @@ public class TestImageUtils {
 		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/Y5X-1123.jpg");
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/Y6X-1123.jpg");
 		String dest = "C:/Users/admin/Desktop/opencv/open/";
 
 		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
@@ -200,7 +200,68 @@ public class TestImageUtils {
 		String dest = "C:/Users/admin/Desktop/opencv/open/";
 
 		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
-		
+
 		HandleImgUtils.trimImg(mat);
+	}
+
+	@Test
+	/**
+	 * 测试判断图像是表格图像还是一般图像
+	 */
+	public void testJudgeImg() {
+		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/a1.png");
+
+		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
+
+		// 灰度化
+		mat = HandleImgUtils.gray(mat);
+		// 二值化
+		mat = HandleImgUtils.binaryzation(mat);
+
+		mat = HandleImgUtils.strokeWhite(mat);
+
+		// 8邻域降噪
+		mat = HandleImgUtils.navieRemoveNoise(mat, 1);
+
+		// 连通域降噪
+		mat = HandleImgUtils.connectedRemoveNoise(mat, 10.0);
+
+		System.out.println(HandleImgUtils.judgeImg(mat));
+	}
+
+	@Test
+	/**
+	 * 测试切割普通的图像
+	 */
+	public void testCutNormalImg() {
+		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/abc.png");
+		String dest = "C:/Users/admin/Desktop/opencv/open/";
+		
+		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
+
+		// 灰度化
+		mat = HandleImgUtils.gray(mat);
+		// 二值化
+		mat = HandleImgUtils.binaryzation(mat);
+
+		mat = HandleImgUtils.strokeWhite(mat);
+
+		// 8邻域降噪
+		mat = HandleImgUtils.navieRemoveNoise(mat, 1);
+
+		// 连通域降噪
+		mat = HandleImgUtils.connectedRemoveNoise(mat, 10.0);
+
+		// 垂直切割
+		 List<Mat> list = HandleImgUtils.cutNormalImgY(mat);
+		 for (int i = 0; i < list.size(); i++) {
+			 Imgcodecs.imwrite(dest + "NormalY" + i + imgFile.getName(), list.get(i));
+		 }
 	}
 }

@@ -361,6 +361,7 @@ public class HandleImgUtils {
 		return YMat;
 	}
 
+	
 	/**
 	 * 垂直投影法切割，仅适用于表格的图像
 	 * 
@@ -419,6 +420,65 @@ public class HandleImgUtils {
 		}
 		return XMat;
 	}
+	
+	/**
+	 * 垂直投影法切割，仅适用于不是表格的图像
+	 * 
+	 * @param src
+	 *            Mat矩阵对象
+	 * @return
+	 */
+	public static List<Mat> cutNormalImgY(Mat src) {
+		int i, j;
+		int width = getImgWidth(src), height = getImgHeight(src);
+		int[] yNum, cNum;
+		int average = 0;// 记录黑色像素和的平均值
+		// 统计出每列黑色像素点的个数
+		yNum = countPixel(src, width, height, false);
+
+		// 经过测试这样得到的平均值最优，平均值的选取很重要
+		cNum = Arrays.copyOf(yNum, yNum.length);
+		Arrays.sort(cNum);
+		for (i = 0 ; i < width / 8 ; i++) {
+			average += cNum[i];
+		}
+		average /= width;
+
+		// 把需要切割的x轴的点存到cutX中
+		List<Integer> cutX = new ArrayList<Integer>();
+		for (i = 0; i < width; i += 2) {
+			if (yNum[i] <= average) {
+				cutX.add(i);
+			}
+		}
+
+		// 优化cutX
+		if (cutX.size() != 0) {
+			int temp = cutX.get(cutX.size() - 1);
+			// 因为线条有粗细，优化cutX
+			for (i = cutX.size() - 2; i >= 0; i--) {
+				int k = temp - cutX.get(i);
+				if (k <= 10) {
+					cutX.remove(i);
+				} else {
+					temp = cutX.get(i);
+				}
+			}
+		}
+
+		// 把切割的图片都保存到XMat中
+		List<Mat> XMat = new ArrayList<Mat>();
+		for (i = 1; i < cutX.size(); i++) {
+			// 设置感兴趣的区域
+			int startX = cutX.get(i - 1);
+			int w = cutX.get(i) - startX;
+			Mat temp = new Mat(src, new Rect(startX, 0, w, height));
+			Mat t = new Mat();
+			temp.copyTo(t);
+			XMat.add(t);
+		}
+		return XMat;
+	}
 
 	/**
 	 * 把图片归一化到相同的大小
@@ -453,10 +513,10 @@ public class HandleImgUtils {
 		startDown = confirmPositionDown(src , width , height);
 		startLeft = confirmPositionLeft(src , width , height);
 		startRight = confirmPositionRight(src , width , height);
-		startUp = startUp == 10 ? 0 : startUp - 10; 
-		startDown = height - startDown == 10 ? height : startDown + 10;
-		startLeft = startLeft == 10 ? 0 : startLeft - 10;
-		startRight = width - startRight == 10 ? width : startRight + 10;
+		startUp = startUp == 10 || startUp == -1 ? 0 : startUp - 10; 
+		startDown = height - startDown == 10 || startDown == -1 ? height : startDown + 10;
+		startLeft = startLeft == 10 || startLeft == -1 ? 0 : startLeft - 10;
+		startRight = width - startRight == 10 || startRight == -1 ? width : startRight + 10;
 		//设置感兴趣的区域
 		Mat temp = new Mat(src, new Rect(startLeft , startUp, startRight - startLeft, startDown - startUp));
 		Mat t = new Mat();
@@ -589,4 +649,34 @@ public class HandleImgUtils {
 		}
 		return src;
 	}
+	
+	
+	/**
+	 * 判单输入的图像是表格类型的图，还是一般的图
+	 * 根据表格图像的特征，即表格横线大致一样长的特征
+	 * true表示是表格图像
+	 * false表示是一般图像
+	 * @param src Mat矩阵对象
+	 * @return
+	 */
+	public static boolean judgeImg(Mat src) {
+		int width = getImgWidth(src), height = getImgHeight(src);
+		int[] xNum;
+		int count = 0;//计数器
+		// 统计出每行黑色像素点的个数
+		xNum = countPixel(src, height, width, true);
+		Arrays.sort(xNum);
+		for(int i = xNum.length - 2 , max = xNum[xNum.length - 1] ; i > 0 ; i--) {
+			if(max - xNum[i] <= 50) {
+				count++;
+			}else {
+				break;
+			}
+		}
+		if(count > 8 || count == 0) {
+			return false;
+		}
+		return true;
+	}
+	
 }
