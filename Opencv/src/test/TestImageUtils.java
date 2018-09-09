@@ -140,7 +140,7 @@ public class TestImageUtils {
 		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/Y2X-1123.jpg");
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/test.jpg");
 		String dest = "C:/Users/admin/Desktop/opencv/open/";
 
 		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
@@ -161,10 +161,11 @@ public class TestImageUtils {
 		HandleImgUtils.saveImg(mat, dest + "noise-" + imgFile.getName());
 
 		// 水平切割
-		// List<Mat> list = HandleImgUtils.cutImgX(mat);
-		// for(int i = 0 ; i < list.size() ; i++) {
-		// Imgcodecs.imwrite(dest + "X-"+ i + imgFile.getName() , list.get(i) );
-		// }
+		 List<Mat> list = HandleImgUtils.cutImgX(mat);
+		 System.out.println(list.size());
+		 for(int i = 0 ; i < list.size() ; i++) {
+			 Imgcodecs.imwrite(dest + "X-"+ i + imgFile.getName() , list.get(i) );
+		 }
 
 		// 垂直切割
 		// List<Mat> list = HandleImgUtils.cutImgY(mat);
@@ -242,7 +243,7 @@ public class TestImageUtils {
 
 		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/abc.png");
 		String dest = "C:/Users/admin/Desktop/opencv/open/";
-		
+
 		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
 
 		// 灰度化
@@ -259,9 +260,45 @@ public class TestImageUtils {
 		mat = HandleImgUtils.connectedRemoveNoise(mat, 10.0);
 
 		// 垂直切割
-		 List<Mat> list = HandleImgUtils.cutNormalImgY(mat);
-		 for (int i = 0; i < list.size(); i++) {
-			 Imgcodecs.imwrite(dest + "NormalY" + i + imgFile.getName(), list.get(i));
-		 }
+		List<Mat> list = HandleImgUtils.cutNormalImgY(mat);
+		for (int i = 0; i < list.size(); i++) {
+			Imgcodecs.imwrite(dest + "NormalY" + i + imgFile.getName(), list.get(i));
+		}
 	}
+
+	@Test
+	/**
+	 * 测试判断图像是否为空
+	 */
+	public void testJudgeEmpty() {
+		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/a3.png");
+		String dest = "C:/Users/admin/Desktop/opencv/open/";
+
+		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
+		// 灰度化
+		mat = HandleImgUtils.gray(mat);
+		// 二值化
+		mat = HandleImgUtils.binaryzation(mat);
+
+		System.out.println(HandleImgUtils.judgeEmpty(mat));
+	}
+
+	@Test
+	/**
+	 * 测试整体流程
+	 */
+	public void testProcess() {
+		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/a7.png");
+		String dest = "C:/Users/admin/Desktop/opencv/open/";
+		
+		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
+		HandleImgUtils.handleImg(mat, dest, imgFile.getName());
+	}
+
 }

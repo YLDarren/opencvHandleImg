@@ -489,10 +489,6 @@ public class HandleImgUtils {
 	 */
 	public static Mat resize(Mat src) {
 		src =  trimImg(src);
-		src = gray(src);
-		src = binaryzation(src);
-		src = navieRemoveNoise(src, 1);
-		src = connectedRemoveNoise(src, 1.0);
 		Mat dst = new Mat();
 		// 区域插值(INTER_AREA):图像放大时类似于线性插值，图像缩小时可以避免波纹出现。
 		Imgproc.resize(src, dst, dsize, 0, 0, Imgproc.INTER_AREA);
@@ -508,15 +504,16 @@ public class HandleImgUtils {
 	public static Mat trimImg(Mat src) {
 		//定义具体内容开始的点
 		int startUp = 0 , startDown = 0 , startLeft = 0 , startRight = 0;
+		int thresold = 30;
 		int width = getImgWidth(src) , height = getImgHeight(src);
 		startUp = confirmPositionUp(src , width , height);
 		startDown = confirmPositionDown(src , width , height);
 		startLeft = confirmPositionLeft(src , width , height);
 		startRight = confirmPositionRight(src , width , height);
-		startUp = startUp == 10 || startUp == -1 ? 0 : startUp - 10; 
-		startDown = height - startDown == 10 || startDown == -1 ? height : startDown + 10;
-		startLeft = startLeft == 10 || startLeft == -1 ? 0 : startLeft - 10;
-		startRight = width - startRight == 10 || startRight == -1 ? width : startRight + 10;
+		startUp = startUp <= thresold || startUp == -1 ? 0 : startUp - thresold; 
+		startDown = height - startDown <= thresold || startDown == -1 ? height : startDown + thresold;
+		startLeft = startLeft <= thresold || startLeft == -1 ? 0 : startLeft - thresold;
+		startRight = width - startRight <= thresold || startRight == -1 ? width : startRight + thresold;
 		//设置感兴趣的区域
 		Mat temp = new Mat(src, new Rect(startLeft , startUp, startRight - startLeft, startDown - startUp));
 		Mat t = new Mat();
@@ -533,8 +530,9 @@ public class HandleImgUtils {
 	 */
 	public static int confirmPositionUp(Mat src , int width , int  height) {
 		int i , j;
-		for(i = 10 ; i < height - 10 ; i++ ) {
-			for(j = 10 ; j < width - 10 ; j++) {
+		int thresold = 10;
+		for(i = thresold ; i < height - thresold ; i++ ) {
+			for(j = thresold ; j < width - thresold ; j++) {
 				if(getPixel(src , i , j) != WHITE) {
 					return i;
 				}
@@ -552,8 +550,9 @@ public class HandleImgUtils {
 	 */
 	public static int confirmPositionDown(Mat src , int width , int  height) {
 		int i , j;
-		for(i = height - 10 ; i > 10 ; i-- ) {
-			for(j = 10 ; j < width - 10 ; j++) {
+		int thresold = 10;
+		for(i = height - thresold ; i > thresold ; i-- ) {
+			for(j = thresold ; j < width - thresold ; j++) {
 				if(getPixel(src , i , j) != WHITE) {
 					return i;
 				}
@@ -571,8 +570,9 @@ public class HandleImgUtils {
 	 */
 	public static int confirmPositionLeft(Mat src , int width , int  height) {
 		int i , j;
-		for(i = 10 ; i < width - 10 ; i++ ) {
-			for(j = 10 ; j < height - 10 ; j++) {
+		int thresold = 10;
+		for(i = thresold ; i < width - thresold ; i++ ) {
+			for(j = thresold ; j < height - thresold ; j++) {
 				if(getPixel(src , j , i) != WHITE) {
 					return i;
 				}
@@ -590,8 +590,9 @@ public class HandleImgUtils {
 	 */
 	public static int confirmPositionRight(Mat src , int width , int  height) {
 		int i , j;
-		for(i = width - 10 ; i > 10 ; i-- ) {
-			for(j = height - 10 ; j > 10 ; j--) {
+		int thresold = 10;
+		for(i = width - thresold ; i > thresold ; i-- ) {
+			for(j = height - thresold ; j > thresold ; j--) {
 				if(getPixel(src , j , i) != WHITE) {
 					return i;
 				}
@@ -667,7 +668,7 @@ public class HandleImgUtils {
 		xNum = countPixel(src, height, width, true);
 		Arrays.sort(xNum);
 		for(int i = xNum.length - 2 , max = xNum[xNum.length - 1] ; i > 0 ; i--) {
-			if(max - xNum[i] <= 50) {
+			if(max - xNum[i] <= 100) {
 				count++;
 			}else {
 				break;
@@ -677,6 +678,101 @@ public class HandleImgUtils {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * 输入图像矩阵，判断图像是否有内容
+	 * true表示没有内容，false表示有内容
+	 * @param src
+	 * @return
+	 */
+	public static boolean judgeEmpty(Mat src) {
+		int width = getImgWidth(src) , height = getImgHeight(src);
+		//统计出每行黑色像素点的个数
+		int[] xNum = countPixel(src, height, width, true);
+		int thresold = 50;//把像素点和的阀值设置位50，如果不大于则认为无内容，即空图
+		int sum = 0;//记录图像黑色像素的和
+		for(int i = 0 ; i < xNum.length ; i++ ) {
+			sum += xNum[i];
+		}
+		if(sum > thresold) {
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * 灰度话、二值化、降噪、判图类型、切割、判空、归一化
+	 * @param src Mat矩阵图像
+	 * @param filePath 图像保存路径
+	 * @param basicName 图像保存的基本名字
+	 */
+	public static void handleImg(Mat src , String filePath , String basicName) {
+		src = grayRemoveNoise(src);
+		boolean b = judgeImg(src);
+		int count = 1;//记录生成图像的个数
+		if(b) {
+			System.out.println("表格图像");
+			//表格图像
+			List<Mat> XMatList = cutImgX(src);
+			System.out.println("XMatList = " + XMatList.size());
+			List<Mat> YMatList = new ArrayList<Mat>();
+			for(Mat mat : XMatList) {
+				List<Mat> tempYMatLsit = cutImgY(mat);
+				System.out.println("tempYMatLsit = " + tempYMatLsit.size());
+				for(Mat mat1 : tempYMatLsit) {
+					YMatList.add(mat1);
+				}
+				tempYMatLsit = null;
+			}
+			XMatList = null;
+			//遍历YMatList
+			for(Mat matY : YMatList) {
+				//判空
+				boolean b1 = judgeEmpty(matY);
+				if(!b1) {
+					//有内容，归一化
+					matY = resize(matY);
+					String name = filePath + count + "-" + basicName;
+					saveImg(matY, name);
+					System.out.println("生成图像的名字 " + name);
+					count++;
+				}
+			}
+			YMatList = null;
+		}else {
+			System.out.println("不是表格图像");
+			//不是表格图像，只实现了垂直投影切割
+			List<Mat> YMatList = cutNormalImgY(src);
+			System.out.println("YMatList = " + YMatList.size());
+			//遍历YMatList
+			for(Mat matY : YMatList) {
+				//判空
+				boolean b1 = judgeEmpty(matY);
+				if(!b1) {
+					//有内容，归一化
+					matY = resize(matY);
+					String name = filePath + count + "-" + basicName;
+					saveImg(matY, name);
+					System.out.println("生成图像的名字 " + name);
+					count++;
+				}
+			}
+			YMatList = null;
+		}
+	}
+	
+	/**
+	 * 灰度话、二值化、降噪
+	 * @param src Mat矩阵图像
+	 * @return
+	 */
+	public static Mat grayRemoveNoise(Mat src) {
+		src = gray(src);
+		src = binaryzation(src);
+		src = navieRemoveNoise(src, 1);
+		src = connectedRemoveNoise(src, 1.0);
+		return src;
 	}
 	
 }
