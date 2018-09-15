@@ -180,12 +180,14 @@ public class TestImageUtils {
 		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/Y6X-1123.jpg");
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/123/123.jpg");
 		String dest = "C:/Users/admin/Desktop/opencv/open/";
 
 		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
-
-		Imgcodecs.imwrite(dest + "resize-" + imgFile.getName(), HandleImgUtils.resize(mat));
+		
+		System.out.println(mat.channels());
+		
+//		Imgcodecs.imwrite(dest + "resize-" + imgFile.getName(), HandleImgUtils.resize(mat));
 
 	}
 
@@ -294,11 +296,21 @@ public class TestImageUtils {
 		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/a7.png");
-		String dest = "C:/Users/admin/Desktop/opencv/open/";
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/123/x9.jpg");
+		String dest = "C:/Users/admin/Desktop/opencv/open/123/";
 		
 		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
 		HandleImgUtils.handleImg(mat, dest, imgFile.getName());
+	}
+	
+	@Test
+	/**
+	 * 测试矫正图像
+	 */
+	public void testCorrect() {
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		Mat src = HandleImgUtils.matFactory("C:/Users/admin/Desktop/opencv/open/x/123.jpg");
+		HandleImgUtils.correct(src);
 	}
 
 }

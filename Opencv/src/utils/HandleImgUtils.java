@@ -5,8 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.MatOfPoint2f;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
+import org.opencv.core.RotatedRect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -21,8 +24,8 @@ import org.opencv.imgproc.Imgproc;
 public class HandleImgUtils {
 	private static final int BLACK = 0;
 	private static final int WHITE = 255;
-	//设置归一化图片的固定大小
-	private static final Size dsize = new Size(32 , 32);
+	// 设置归一化图片的固定大小
+	private static final Size dsize = new Size(32, 32);
 
 	// 私有化构造函数
 	private HandleImgUtils() {
@@ -361,7 +364,6 @@ public class HandleImgUtils {
 		return YMat;
 	}
 
-	
 	/**
 	 * 垂直投影法切割，仅适用于表格的图像
 	 * 
@@ -420,7 +422,7 @@ public class HandleImgUtils {
 		}
 		return XMat;
 	}
-	
+
 	/**
 	 * 垂直投影法切割，仅适用于不是表格的图像
 	 * 
@@ -439,7 +441,7 @@ public class HandleImgUtils {
 		// 经过测试这样得到的平均值最优，平均值的选取很重要
 		cNum = Arrays.copyOf(yNum, yNum.length);
 		Arrays.sort(cNum);
-		for (i = 0 ; i < width / 8 ; i++) {
+		for (i = 0; i < width / 8; i++) {
 			average += cNum[i];
 		}
 		average /= width;
@@ -488,119 +490,274 @@ public class HandleImgUtils {
 	 * @return
 	 */
 	public static Mat resize(Mat src) {
-		src =  trimImg(src);
+		src = trimImg(src);
 		Mat dst = new Mat();
 		// 区域插值(INTER_AREA):图像放大时类似于线性插值，图像缩小时可以避免波纹出现。
 		Imgproc.resize(src, dst, dsize, 0, 0, Imgproc.INTER_AREA);
 		return dst;
 	}
-	
+
+	/**
+	 * canny算法，边缘检测
+	 * 
+	 * @param src
+	 * @return
+	 */
+	public static Mat canny(Mat src) {
+		Mat mat = src.clone();
+		Imgproc.Canny(src, mat, 60, 200);
+		return mat;
+	}
+
+	/**
+	 * 返回边缘检测之后的最大矩形,并返回
+	 * 
+	 * @param cannyMat
+	 *            Canny之后的mat矩阵
+	 * @return
+	 */
+	public static RotatedRect findMaxRect(Mat cannyMat) {
+
+		List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+		Mat hierarchy = new Mat();
+
+		// 寻找轮廓
+		Imgproc.findContours(cannyMat, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_NONE,
+				new Point(0, 0));
+
+		// 找出匹配到的最大轮廓
+		double area = Imgproc.boundingRect(contours.get(0)).area();
+		int index = 0;
+
+		// 找出匹配到的最大轮廓
+		for (int i = 0; i < contours.size(); i++) {
+			double tempArea = Imgproc.boundingRect(contours.get(i)).area();
+			if (tempArea > area) {
+				area = tempArea;
+				index = i;
+			}
+		}
+
+		MatOfPoint2f matOfPoint2f = new MatOfPoint2f(contours.get(index).toArray());
+
+		RotatedRect rect = Imgproc.minAreaRect(matOfPoint2f);
+
+		return rect;
+	}
+
+	/**
+	 * 旋转矩形
+	 * 
+	 * @param src
+	 *            mat矩阵
+	 * @param rect
+	 *            矩形
+	 * @return
+	 */
+	public static Mat rotation(Mat cannyMat, RotatedRect rect) {
+		// 获取矩形的四个顶点
+		Point[] rectPoint = new Point[4];
+		rect.points(rectPoint);
+
+		double angle = rect.angle + 90;
+
+		Point center = rect.center;
+
+		Mat CorrectImg = new Mat(cannyMat.size(), cannyMat.type());
+
+		cannyMat.copyTo(CorrectImg);
+
+		// 得到旋转矩阵算子
+		Mat matrix = Imgproc.getRotationMatrix2D(center, angle, 0.8);
+
+		Imgproc.warpAffine(CorrectImg, CorrectImg, matrix, CorrectImg.size(), 1, 0, new Scalar(0, 0, 0));
+
+		return CorrectImg;
+	}
+
+	/**
+	 * 把矫正后的图像切割出来
+	 * 
+	 * @param correctMat
+	 *            图像矫正后的Mat矩阵
+	 */
+	public static void cutRect(Mat correctMat , Mat nativeCorrectMat) {
+		// 获取最大矩形
+		RotatedRect rect = findMaxRect(correctMat);
+		
+		Point[] rectPoint = new Point[4];
+		rect.points(rectPoint);
+		
+		int startLeft = (int)Math.abs(rectPoint[0].x);
+		int startUp = (int)Math.abs(rectPoint[0].y < rectPoint[1].y ? rectPoint[0].y : rectPoint[1].y);
+		int width = (int)Math.abs(rectPoint[2].x - rectPoint[0].x);
+		int height = (int)Math.abs(rectPoint[1].y - rectPoint[0].y);
+		
+		System.out.println("startLeft = " + startLeft);
+		System.out.println("startUp = " + startUp);
+		System.out.println("width = " + width);
+		System.out.println("height = " + height);
+		
+		for(Point p : rectPoint) {
+			System.out.println(p.x + " , " + p.y);
+		}
+		
+		Mat temp = new Mat(nativeCorrectMat , new Rect(startLeft , startUp , width , height ));
+		Mat t = new Mat();
+		temp.copyTo(t);
+		
+		HandleImgUtils.saveImg(t , "C:/Users/admin/Desktop/opencv/open/x/cutRect.jpg");
+	}
+
+	/**
+	 * 矫正图像
+	 * 
+	 * @param src
+	 * @return
+	 */
+	public static void correct(Mat src) {
+		// Canny
+		Mat cannyMat = canny(src);
+
+		// 获取最大矩形
+		RotatedRect rect = findMaxRect(cannyMat);
+
+		// 旋转矩形
+		Mat CorrectImg = rotation(cannyMat , rect);
+		Mat NativeCorrectImg = rotation(src , rect);
+		
+		
+		//裁剪矩形
+		cutRect(CorrectImg , NativeCorrectImg);
+		
+		HandleImgUtils.saveImg(src, "C:/Users/admin/Desktop/opencv/open/x/srcImg.jpg");
+
+		HandleImgUtils.saveImg(CorrectImg, "C:/Users/admin/Desktop/opencv/open/x/correct.jpg");
+	}
+
 	/**
 	 * 裁剪图像，主要使切割图像的内容更靠中间(即去除内容周边的空白)
 	 * 
-	 * @param src  Mat矩阵对象
+	 * @param src
+	 *            Mat矩阵对象
 	 * @return
 	 */
 	public static Mat trimImg(Mat src) {
-		//定义具体内容开始的点
-		int startUp = 0 , startDown = 0 , startLeft = 0 , startRight = 0;
+		// 定义具体内容开始的点
+		int startUp = 0, startDown = 0, startLeft = 0, startRight = 0;
 		int thresold = 30;
-		int width = getImgWidth(src) , height = getImgHeight(src);
-		startUp = confirmPositionUp(src , width , height);
-		startDown = confirmPositionDown(src , width , height);
-		startLeft = confirmPositionLeft(src , width , height);
-		startRight = confirmPositionRight(src , width , height);
-		startUp = startUp <= thresold || startUp == -1 ? 0 : startUp - thresold; 
+		int width = getImgWidth(src), height = getImgHeight(src);
+		startUp = confirmPositionUp(src, width, height);
+		startDown = confirmPositionDown(src, width, height);
+		startLeft = confirmPositionLeft(src, width, height);
+		startRight = confirmPositionRight(src, width, height);
+		startUp = startUp <= thresold || startUp == -1 ? 0 : startUp - thresold;
 		startDown = height - startDown <= thresold || startDown == -1 ? height : startDown + thresold;
 		startLeft = startLeft <= thresold || startLeft == -1 ? 0 : startLeft - thresold;
 		startRight = width - startRight <= thresold || startRight == -1 ? width : startRight + thresold;
-		//设置感兴趣的区域
-		Mat temp = new Mat(src, new Rect(startLeft , startUp, startRight - startLeft, startDown - startUp));
+		// 设置感兴趣的区域
+		Mat temp = new Mat(src, new Rect(startLeft, startUp, startRight - startLeft, startDown - startUp));
 		Mat t = new Mat();
 		temp.copyTo(t);
 		return t;
 	}
-	
+
 	/**
 	 * 确定图像内容startUp的位置
-	 * @param src Mat矩阵对象
-	 * @param width 图像的宽
-	 * @param height 图像的高
+	 * 
+	 * @param src
+	 *            Mat矩阵对象
+	 * @param width
+	 *            图像的宽
+	 * @param height
+	 *            图像的高
 	 * @return
 	 */
-	public static int confirmPositionUp(Mat src , int width , int  height) {
-		int i , j;
+	public static int confirmPositionUp(Mat src, int width, int height) {
+		int i, j;
 		int thresold = 10;
-		for(i = thresold ; i < height - thresold ; i++ ) {
-			for(j = thresold ; j < width - thresold ; j++) {
-				if(getPixel(src , i , j) != WHITE) {
+		for (i = thresold; i < height - thresold; i++) {
+			for (j = thresold; j < width - thresold; j++) {
+				if (getPixel(src, i, j) != WHITE) {
 					return i;
 				}
 			}
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * 确定图像内容startDown的位置
-	 * @param src Mat矩阵对象
-	 * @param width 图像的宽
-	 * @param height 图像 的高
+	 * 
+	 * @param src
+	 *            Mat矩阵对象
+	 * @param width
+	 *            图像的宽
+	 * @param height
+	 *            图像 的高
 	 * @return
 	 */
-	public static int confirmPositionDown(Mat src , int width , int  height) {
-		int i , j;
+	public static int confirmPositionDown(Mat src, int width, int height) {
+		int i, j;
 		int thresold = 10;
-		for(i = height - thresold ; i > thresold ; i-- ) {
-			for(j = thresold ; j < width - thresold ; j++) {
-				if(getPixel(src , i , j) != WHITE) {
+		for (i = height - thresold; i > thresold; i--) {
+			for (j = thresold; j < width - thresold; j++) {
+				if (getPixel(src, i, j) != WHITE) {
 					return i;
 				}
 			}
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * 确定图像内容startLeft的位置
-	 * @param src Mat矩阵对象
-	 * @param width 图像的宽
-	 * @param height 图像的高
+	 * 
+	 * @param src
+	 *            Mat矩阵对象
+	 * @param width
+	 *            图像的宽
+	 * @param height
+	 *            图像的高
 	 * @return
 	 */
-	public static int confirmPositionLeft(Mat src , int width , int  height) {
-		int i , j;
+	public static int confirmPositionLeft(Mat src, int width, int height) {
+		int i, j;
 		int thresold = 10;
-		for(i = thresold ; i < width - thresold ; i++ ) {
-			for(j = thresold ; j < height - thresold ; j++) {
-				if(getPixel(src , j , i) != WHITE) {
+		for (i = thresold; i < width - thresold; i++) {
+			for (j = thresold; j < height - thresold; j++) {
+				if (getPixel(src, j, i) != WHITE) {
 					return i;
 				}
 			}
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * 确定图像内容startRight的位置
-	 * @param src Mat矩阵对象
-	 * @param width 图像的宽
-	 * @param height 图像的高
+	 * 
+	 * @param src
+	 *            Mat矩阵对象
+	 * @param width
+	 *            图像的宽
+	 * @param height
+	 *            图像的高
 	 * @return
 	 */
-	public static int confirmPositionRight(Mat src , int width , int  height) {
-		int i , j;
+	public static int confirmPositionRight(Mat src, int width, int height) {
+		int i, j;
 		int thresold = 10;
-		for(i = width - thresold ; i > thresold ; i-- ) {
-			for(j = height - thresold ; j > thresold ; j--) {
-				if(getPixel(src , j , i) != WHITE) {
+		for (i = width - thresold; i > thresold; i--) {
+			for (j = height - thresold; j > thresold; j--) {
+				if (getPixel(src, j, i) != WHITE) {
 					return i;
 				}
 			}
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * 统计图像每行/每列黑色像素点的个数 (n1,n2)=>(height,width),b=true;统计每行
 	 * (n1,n2)=>(width,height),b=false;统计每列
@@ -650,107 +807,113 @@ public class HandleImgUtils {
 		}
 		return src;
 	}
-	
-	
+
 	/**
-	 * 判单输入的图像是表格类型的图，还是一般的图
-	 * 根据表格图像的特征，即表格横线大致一样长的特征
-	 * true表示是表格图像
-	 * false表示是一般图像
-	 * @param src Mat矩阵对象
+	 * 判单输入的图像是表格类型的图，还是一般的图 根据表格图像的特征，即表格横线大致一样长的特征 true表示是表格图像 false表示是一般图像
+	 * 
+	 * @param src
+	 *            Mat矩阵对象
 	 * @return
 	 */
 	public static boolean judgeImg(Mat src) {
 		int width = getImgWidth(src), height = getImgHeight(src);
 		int[] xNum;
-		int count = 0;//计数器
+		int count = 0;// 计数器
 		// 统计出每行黑色像素点的个数
 		xNum = countPixel(src, height, width, true);
 		Arrays.sort(xNum);
-		for(int i = xNum.length - 2 , max = xNum[xNum.length - 1] ; i > 0 ; i--) {
-			if(max - xNum[i] <= 100) {
+		for (int i = xNum.length - 2, max = xNum[xNum.length - 1]; i > 0; i--) {
+			if (max - xNum[i] <= 100) {
 				count++;
-			}else {
+			} else {
 				break;
 			}
 		}
-		if(count > 8 || count == 0) {
+		if (count > 8 || count == 0) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	/**
-	 * 输入图像矩阵，判断图像是否有内容
-	 * true表示没有内容，false表示有内容
+	 * 输入图像矩阵，判断图像是否有内容 true表示没有内容，false表示有内容
+	 * 
 	 * @param src
 	 * @return
 	 */
 	public static boolean judgeEmpty(Mat src) {
-		int width = getImgWidth(src) , height = getImgHeight(src);
-		//统计出每行黑色像素点的个数
+		int width = getImgWidth(src), height = getImgHeight(src);
+		// 统计出每行黑色像素点的个数
 		int[] xNum = countPixel(src, height, width, true);
-		int thresold = 50;//把像素点和的阀值设置位50，如果不大于则认为无内容，即空图
-		int sum = 0;//记录图像黑色像素的和
-		for(int i = 0 ; i < xNum.length ; i++ ) {
+		int thresold = 50;// 把像素点和的阀值设置位50，如果不大于则认为无内容，即空图
+		int sum = 0;// 记录图像黑色像素的和
+		for (int i = 0; i < xNum.length; i++) {
 			sum += xNum[i];
 		}
-		if(sum > thresold) {
+		if (sum > thresold) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 灰度话、二值化、降噪、判图类型、切割、判空、归一化
-	 * @param src Mat矩阵图像
-	 * @param filePath 图像保存路径
-	 * @param basicName 图像保存的基本名字
+	 * 
+	 * @param src
+	 *            Mat矩阵图像
+	 * @param filePath
+	 *            图像保存路径
+	 * @param basicName
+	 *            图像保存的基本名字
 	 */
-	public static void handleImg(Mat src , String filePath , String basicName) {
+	public static void handleImg(Mat src, String filePath, String basicName) {
 		src = grayRemoveNoise(src);
 		boolean b = judgeImg(src);
-		int count = 1;//记录生成图像的个数
-		if(b) {
+		int count = 1;// 记录生成图像的个数
+		if (b) {
 			System.out.println("表格图像");
-			//表格图像
+			// 表格图像
 			List<Mat> XMatList = cutImgX(src);
+			for (int i = 0; i < XMatList.size(); i++) {
+				saveImg(XMatList.get(i), filePath + i + "-X-" + basicName);
+			}
 			System.out.println("XMatList = " + XMatList.size());
 			List<Mat> YMatList = new ArrayList<Mat>();
-			for(Mat mat : XMatList) {
+			for (Mat mat : XMatList) {
 				List<Mat> tempYMatLsit = cutImgY(mat);
 				System.out.println("tempYMatLsit = " + tempYMatLsit.size());
-				for(Mat mat1 : tempYMatLsit) {
+				for (Mat mat1 : tempYMatLsit) {
 					YMatList.add(mat1);
 				}
 				tempYMatLsit = null;
 			}
 			XMatList = null;
-			//遍历YMatList
-			for(Mat matY : YMatList) {
-				//判空
+
+			// 遍历YMatList
+			for (Mat matY : YMatList) {
+				// 判空
 				boolean b1 = judgeEmpty(matY);
-				if(!b1) {
-					//有内容，归一化
+				if (!b1) {
+					// 有内容，归一化
 					matY = resize(matY);
-					String name = filePath + count + "-" + basicName;
+					String name = filePath + count + "-resize-" + basicName;
 					saveImg(matY, name);
 					System.out.println("生成图像的名字 " + name);
 					count++;
 				}
 			}
 			YMatList = null;
-		}else {
+		} else {
 			System.out.println("不是表格图像");
-			//不是表格图像，只实现了垂直投影切割
+			// 不是表格图像，只实现了垂直投影切割
 			List<Mat> YMatList = cutNormalImgY(src);
 			System.out.println("YMatList = " + YMatList.size());
-			//遍历YMatList
-			for(Mat matY : YMatList) {
-				//判空
+			// 遍历YMatList
+			for (Mat matY : YMatList) {
+				// 判空
 				boolean b1 = judgeEmpty(matY);
-				if(!b1) {
-					//有内容，归一化
+				if (!b1) {
+					// 有内容，归一化
 					matY = resize(matY);
 					String name = filePath + count + "-" + basicName;
 					saveImg(matY, name);
@@ -761,10 +924,12 @@ public class HandleImgUtils {
 			YMatList = null;
 		}
 	}
-	
+
 	/**
 	 * 灰度话、二值化、降噪
-	 * @param src Mat矩阵图像
+	 * 
+	 * @param src
+	 *            Mat矩阵图像
 	 * @return
 	 */
 	public static Mat grayRemoveNoise(Mat src) {
@@ -774,5 +939,5 @@ public class HandleImgUtils {
 		src = connectedRemoveNoise(src, 1.0);
 		return src;
 	}
-	
+
 }
