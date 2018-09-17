@@ -506,6 +506,7 @@ public class HandleImgUtils {
 	public static Mat canny(Mat src) {
 		Mat mat = src.clone();
 		Imgproc.Canny(src, mat, 60, 200);
+		HandleImgUtils.saveImg(mat , "C:/Users/admin/Desktop/opencv/open/x/canny.jpg");
 		return mat;
 	}
 
@@ -588,25 +589,33 @@ public class HandleImgUtils {
 		Point[] rectPoint = new Point[4];
 		rect.points(rectPoint);
 		
-		int startLeft = (int)Math.abs(rectPoint[0].x);
-		int startUp = (int)Math.abs(rectPoint[0].y < rectPoint[1].y ? rectPoint[0].y : rectPoint[1].y);
-		int width = (int)Math.abs(rectPoint[2].x - rectPoint[0].x);
-		int height = (int)Math.abs(rectPoint[1].y - rectPoint[0].y);
+		int[] roi = cutRectHelp(rectPoint);
 		
-		System.out.println("startLeft = " + startLeft);
-		System.out.println("startUp = " + startUp);
-		System.out.println("width = " + width);
-		System.out.println("height = " + height);
-		
-		for(Point p : rectPoint) {
-			System.out.println(p.x + " , " + p.y);
-		}
-		
-		Mat temp = new Mat(nativeCorrectMat , new Rect(startLeft , startUp , width , height ));
+		Mat temp = new Mat(nativeCorrectMat , new Rect(roi[0] , roi[1] , roi[2] , roi[3] ));
 		Mat t = new Mat();
 		temp.copyTo(t);
 		
 		HandleImgUtils.saveImg(t , "C:/Users/admin/Desktop/opencv/open/x/cutRect.jpg");
+	}
+	
+	/**
+	 * 把矫正后的图像切割出来--辅助函数(修复)
+	 * @param rectPoint 矩形的四个点
+	 * @return int[startLeft , startUp , width , height]
+	 */
+	public static int[] cutRectHelp(Point[] rectPoint) {
+		double minX = rectPoint[0].x;
+		double maxX = rectPoint[0].x;
+		double minY = rectPoint[0].y;
+		double maxY = rectPoint[0].y;
+		for(int i = 1 ; i < rectPoint.length ; i++) {
+			minX = rectPoint[i].x < minX ? rectPoint[i].x : minX;
+			maxX = rectPoint[i].x > maxX ? rectPoint[i].x : maxX;
+			minY = rectPoint[i].y < minY ? rectPoint[i].y : minY;
+			maxY = rectPoint[i].y > maxY ? rectPoint[i].y : maxY;
+		}
+		int[] roi = {(int)(minX) , (int)minY , (int)(maxX - minX) , (int)(maxY - minY)};
+		return roi;
 	}
 
 	/**

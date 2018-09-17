@@ -296,7 +296,7 @@ public class TestImageUtils {
 		// 这个必须要写,不写报java.lang.UnsatisfiedLinkError
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/123/x9.jpg");
+		File imgFile = new File("C:/Users/admin/Desktop/opencv/open/123/123.jpg");
 		String dest = "C:/Users/admin/Desktop/opencv/open/123/";
 		
 		Mat mat = HandleImgUtils.matFactory(imgFile.toString());
@@ -309,7 +309,7 @@ public class TestImageUtils {
 	 */
 	public void testCorrect() {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		Mat src = HandleImgUtils.matFactory("C:/Users/admin/Desktop/opencv/open/x/123.jpg");
+		Mat src = HandleImgUtils.matFactory("C:/Users/admin/Desktop/opencv/open/x/x8.jpg");
 		HandleImgUtils.correct(src);
 	}
 
