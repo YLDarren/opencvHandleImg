@@ -14,8 +14,12 @@
 
 ##### Java基于opencv实现图像数字识别(五)—投影法分割字符[https://www.jianshu.com/p/25ac6dac1408](https://www.jianshu.com/p/25ac6dac1408)
 
-##### Java基于opencv实现图像数字识别(六)—归一化
+##### Java基于opencv实现图像数字识别(六)—归一化[https://www.jianshu.com/p/cababfb990bd](https://www.jianshu.com/p/cababfb990bd)
 > 清除内容周围多余的空白，归一化到相同大小
+
+##### java基于opencv矫正图像[https://www.jianshu.com/p/9eb9d6f6f837](https://www.jianshu.com/p/9eb9d6f6f837)
+
+##### java基于opencv矫正畸变的图像
 
 #### 还需要做的事情
 ```

@@ -2,8 +2,11 @@ package utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.MatOfPoint2f;
@@ -14,6 +17,7 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.utils.Converters;
 
 /**
  * 处理图像的工具类
@@ -506,7 +510,7 @@ public class HandleImgUtils {
 	public static Mat canny(Mat src) {
 		Mat mat = src.clone();
 		Imgproc.Canny(src, mat, 60, 200);
-		HandleImgUtils.saveImg(mat , "C:/Users/admin/Desktop/opencv/open/x/canny.jpg");
+		HandleImgUtils.saveImg(mat, "C:/Users/admin/Desktop/opencv/open/x/canny.jpg");
 		return mat;
 	}
 
@@ -547,6 +551,318 @@ public class HandleImgUtils {
 	}
 
 	/**
+	 * 利用函数approxPolyDP来对指定的点集进行逼近 精确度设置好，效果还是比较好的
+	 * 
+	 * @param cannyMat
+	 */
+	public static Point[] useApproxPolyDPFindPoints(Mat cannyMat) {
+
+		List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+		Mat hierarchy = new Mat();
+
+		// 寻找轮廓
+		Imgproc.findContours(cannyMat, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_NONE,
+				new Point(0, 0));
+
+		// 找出匹配到的最大轮廓
+		double area = Imgproc.boundingRect(contours.get(0)).area();
+		int index = 0;
+
+		// 找出匹配到的最大轮廓
+		for (int i = 0; i < contours.size(); i++) {
+			double tempArea = Imgproc.boundingRect(contours.get(i)).area();
+			if (tempArea > area) {
+				area = tempArea;
+				index = i;
+			}
+		}
+
+		MatOfPoint2f approxCurve = new MatOfPoint2f();
+		MatOfPoint2f matOfPoint2f = new MatOfPoint2f(contours.get(index).toArray());
+
+		// 原始曲线与近似曲线之间的最大距离设置为0.01，true表示是闭合的曲线
+		Imgproc.approxPolyDP(matOfPoint2f, approxCurve, 0.01, true);
+
+		Point[] points = approxCurve.toArray();
+
+		return points;
+	}
+
+	/**
+	 * 把点击划分到四个区域中，即左上，右上，右下，左下
+	 * 
+	 * @param points
+	 *            逼近的点集
+	 * @param referencePoints
+	 *            四个参照点集(通过寻找最大轮廓，进行minAreaRect得到四个点[左上，右上，右下，左下])
+	 */
+	public static Map<String, List> pointsDivideArea(Point[] points, Point[] referencePoints) {
+		// px1 左上，px2左下，py1右上，py2右下
+		List<Point> px1 = new ArrayList<Point>(), px2 = new ArrayList<Point>(), py1 = new ArrayList<Point>(),
+				py2 = new ArrayList<Point>();
+		int thresold = 50;// 设置距离阀值
+		double distance = 0;
+		for (int i = 0; i < referencePoints.length; i++) {
+			for (int j = 0; j < points.length; j++) {
+				distance = Math.pow(referencePoints[i].x - points[j].x, 2)
+						+ Math.pow(referencePoints[i].y - points[j].y, 2);
+				if (distance < Math.pow(thresold, 2)) {
+					if (i == 0) {
+						px1.add(points[j]);
+					} else if (i == 1) {
+						py1.add(points[j]);
+					} else if (i == 2) {
+						py2.add(points[j]);
+					} else if (i == 3) {
+						px2.add(points[j]);
+					}
+				} else {
+					continue;
+				}
+			}
+		}
+		Map<String, List> map = new HashMap<String, List>();
+		map.put("px1", px1);
+		map.put("px2", px2);
+		map.put("py1", py1);
+		map.put("py2", py2);
+
+		return map;
+	}
+
+	/**
+	 * 获取四个顶点的参照点，返回Point数组[左上，右上，右下，左下] 思路： 我们可以把四个点分成两部分，左部分，右部分
+	 * 左部分：高的为左上，低的为左下(高低是以人的视觉) 右部分同理 首先我们找到最左和最右的位置，以它们的两个中间为分界点，
+	 * 靠左的划分到左部分，靠右的划分到右部分 如果一个区域有三个或更多，哪个比较靠近分界线，划分到少的那个区域
+	 * 
+	 * @param cannyMat
+	 * @return
+	 */
+	public static Point[] findReferencePoint(Mat cannyMat) {
+		RotatedRect rect = findMaxRect(cannyMat);
+		Point[] referencePoints = new Point[4];
+		rect.points(referencePoints);
+		double minX = Double.MAX_VALUE;
+		double maxX = Double.MIN_VALUE;
+		for (int i = 0; i < referencePoints.length; i++) {
+			referencePoints[i].x = Math.abs(referencePoints[i].x);
+			referencePoints[i].y = Math.abs(referencePoints[i].y);
+			minX = referencePoints[i].x < minX ? referencePoints[i].x : minX;
+			maxX = referencePoints[i].x > maxX ? referencePoints[i].x : maxX;
+		}
+
+		double center = (minX + maxX) / 2;
+		List<Point> leftPart = new ArrayList<Point>();
+		List<Point> rightPart = new ArrayList<Point>();
+		// 划分左右两个部分
+		for (int i = 0; i < referencePoints.length; i++) {
+			if (referencePoints[i].x < center) {
+				leftPart.add(referencePoints[i]);
+			} else if (referencePoints[i].x > center) {
+				rightPart.add(referencePoints[i]);
+			} else {
+				if (leftPart.size() < rightPart.size()) {
+					leftPart.add(referencePoints[i]);
+				} else {
+					rightPart.add(referencePoints[i]);
+				}
+			}
+		}
+		double minDistance = 0;
+		int minIndex = 0;
+		if (leftPart.size() < rightPart.size()) {
+			// 左部分少
+			minDistance = rightPart.get(0).x - center;
+			minIndex = 0;
+			for (int i = 1; i < rightPart.size(); i++) {
+				if (rightPart.get(i).x - center < minDistance) {
+					minDistance = rightPart.get(i).x - center;
+					minIndex = i;
+				}
+			}
+			leftPart.add(rightPart.remove(minIndex));
+
+		} else if (leftPart.size() > rightPart.size()) {
+			// 右部分少
+			minDistance = center - leftPart.get(0).x;
+			minIndex = 0;
+			for (int i = 1; i < leftPart.size(); i++) {
+				if (center - leftPart.get(0).x < minDistance) {
+					minDistance = center - leftPart.get(0).x;
+					minIndex = i;
+				}
+			}
+			rightPart.add(leftPart.remove(minIndex));
+		}
+
+		if (leftPart.get(0).y < leftPart.get(1).y) {
+			referencePoints[0] = leftPart.get(0);
+			referencePoints[3] = leftPart.get(1);
+		}
+
+		if (rightPart.get(0).y < rightPart.get(1).y) {
+			referencePoints[1] = rightPart.get(0);
+			referencePoints[2] = rightPart.get(1);
+		}
+
+		return referencePoints;
+	}
+
+	/**
+	 * 具体的寻找四个顶点的坐标
+	 * 
+	 * @param map
+	 *            四个点集域 即左上，右上，右下，左下
+	 * @return
+	 */
+	public static Point[] specificFindFourPoint(Map<String, List> map) {
+		Point[] result = new Point[4];// [左上，右上，右下，左下]
+		List<Point> px1 = map.get("px1");// 左上
+		List<Point> px2 = map.get("px2");// 左下
+		List<Point> py1 = map.get("py1");// 右上
+		List<Point> py2 = map.get("py2");// 右下
+
+		System.out.println("px1.size() " + px1.size());
+		System.out.println("px2.size() " + px2.size());
+		System.out.println("py1.size() " + py1.size());
+		System.out.println("py2.size() " + py2.size());
+
+		double maxDistance = 0;
+		double tempDistance;
+		int i, j;
+		int p1 = 0, p2 = 0;// 记录点的下标
+		// 寻找左上，右下
+		for (i = 0; i < px1.size(); i++) {
+			for (j = 0; j < py2.size(); j++) {
+				tempDistance = Math.pow(px1.get(i).x - py2.get(j).x, 2) + Math.pow(px1.get(i).y - py2.get(j).y, 2);
+				if (tempDistance > maxDistance) {
+					maxDistance = tempDistance;
+					p1 = i;
+					p2 = j;
+				}
+			}
+		}
+		result[0] = px1.get(p1);
+		result[2] = py2.get(p2);
+
+		// 寻找左下，右上
+		maxDistance = 0;
+		for (i = 0; i < px2.size(); i++) {
+			for (j = 0; j < py1.size(); j++) {
+				tempDistance = Math.pow(px2.get(i).x - py1.get(j).x, 2) + Math.pow(px2.get(i).y - py1.get(j).y, 2);
+				if (tempDistance > maxDistance) {
+					maxDistance = tempDistance;
+					p1 = i;
+					p2 = j;
+				}
+			}
+		}
+		result[1] = py1.get(p2);
+		result[3] = px2.get(p1);
+		return result;
+	}
+
+	/**
+	 * 寻找四个顶点的坐标 思路： 1、canny描边 2、寻找最大轮廓 3、对最大轮廓点集合逼近，得到轮廓的大致点集合
+	 * 4、把点击划分到四个区域中，即左上，右上，左下，右下 5、根据矩形中，对角线最长，找到矩形的四个顶点坐标
+	 * 
+	 * @param src
+	 */
+	public static Point[] findFourPoint(Mat src) {
+		// 1、canny描边
+		Mat cannyMat = canny(src);
+		// 2、寻找最大轮廓;3、对最大轮廓点集合逼近，得到轮廓的大致点集合
+		Point[] points = useApproxPolyDPFindPoints(cannyMat);
+		
+		//在图像上画出逼近的点
+		Mat approxPolyMat = src.clone();
+		for( int i = 0; i < points.length ; i++) {
+			setPixel(approxPolyMat, (int)points[i].y, (int) points[i].x, 255);
+		}
+		
+		saveImg(approxPolyMat, "C:/Users/admin/Desktop/opencv/open/q/x11-approxPolyMat.jpg");
+		
+		// 获取参照点集
+		Point[] referencePoints = findReferencePoint(cannyMat);
+
+		// 4、把点击划分到四个区域中，即左上，右上，左下，右下(效果还可以)
+		Map<String, List> map = pointsDivideArea(points, referencePoints);
+
+		// 画出标记四个区域中的点集
+		Mat areaMat = src.clone();
+		List<Point> px1 = map.get("px1");// 左上
+		List<Point> px2 = map.get("px2");// 左下
+		List<Point> py1 = map.get("py1");// 右上
+		List<Point> py2 = map.get("py2");// 右下
+
+		for (int i = 0; i < px1.size(); i++) {
+			setPixel(areaMat, (int) px1.get(i).y, (int) px1.get(i).x, 255);
+		}
+
+		for (int i = 0; i < px2.size(); i++) {
+			setPixel(areaMat, (int) px2.get(i).y, (int) px2.get(i).x, 255);
+		}
+
+		for (int i = 0; i < py1.size(); i++) {
+			setPixel(areaMat, (int) py1.get(i).y, (int) py1.get(i).x, 255);
+		}
+
+		for (int i = 0; i < py2.size(); i++) {
+			setPixel(areaMat, (int) py2.get(i).y, (int) py2.get(i).x, 255);
+		}
+
+		saveImg(areaMat, "C:/Users/admin/Desktop/opencv/open/q/x11-pointsDivideArea.jpg");
+
+		// 5、根据矩形中，对角线最长，找到矩形的四个顶点坐标(效果不好)
+		Point[] result = specificFindFourPoint(map);
+
+		return result;
+	}
+
+	/**
+	 * 透视变换，矫正图像 思路： 1、寻找图像的四个顶点的坐标(重要) 思路： 1、canny描边 2、寻找最大轮廓
+	 * 3、对最大轮廓点集合逼近，得到轮廓的大致点集合 4、把点击划分到四个区域中，即左上，右上，左下，右下 5、根据矩形中，对角线最长，找到矩形的四个顶点坐标
+	 * 2、根据输入和输出点获得图像透视变换的矩阵 3、透视变换
+	 * 
+	 * @param src
+	 */
+	public static Mat warpPerspective(Mat src) {
+		// 灰度话
+		src = HandleImgUtils.gray(src);
+		// 找到四个点
+		Point[] points = HandleImgUtils.findFourPoint(src);
+
+		// Canny
+		Mat cannyMat = HandleImgUtils.canny(src);
+		// 寻找最大矩形
+		RotatedRect rect = HandleImgUtils.findMaxRect(cannyMat);
+
+		// 点的顺序[左上 ，右上 ，右下 ，左下]
+		List<Point> listSrcs = java.util.Arrays.asList(points[0], points[1], points[2], points[3]);
+		Mat srcPoints = Converters.vector_Point_to_Mat(listSrcs, CvType.CV_32F);
+
+		Rect r = rect.boundingRect();
+		r.x = Math.abs(r.x);
+		r.y = Math.abs(r.y);
+		List<Point> listDsts = java.util.Arrays.asList(new Point(r.x, r.y), new Point(r.x + r.width, r.y),
+				new Point(r.x + r.width, r.y + r.height), new Point(r.x, r.y + r.height));
+
+		System.out.println(r.x + "," + r.y);
+
+		Mat dstPoints = Converters.vector_Point_to_Mat(listDsts, CvType.CV_32F);
+
+		Mat perspectiveMmat = Imgproc.getPerspectiveTransform(srcPoints, dstPoints);
+
+		Mat dst = new Mat();
+
+		Imgproc.warpPerspective(src, dst, perspectiveMmat, src.size(), Imgproc.INTER_LINEAR + Imgproc.WARP_INVERSE_MAP,
+				1, new Scalar(0));
+		
+		return dst;
+
+	}
+
+	/**
 	 * 旋转矩形
 	 * 
 	 * @param src
@@ -582,25 +898,27 @@ public class HandleImgUtils {
 	 * @param correctMat
 	 *            图像矫正后的Mat矩阵
 	 */
-	public static void cutRect(Mat correctMat , Mat nativeCorrectMat) {
+	public static void cutRect(Mat correctMat, Mat nativeCorrectMat) {
 		// 获取最大矩形
 		RotatedRect rect = findMaxRect(correctMat);
-		
+
 		Point[] rectPoint = new Point[4];
 		rect.points(rectPoint);
-		
+
 		int[] roi = cutRectHelp(rectPoint);
-		
-		Mat temp = new Mat(nativeCorrectMat , new Rect(roi[0] , roi[1] , roi[2] , roi[3] ));
+
+		Mat temp = new Mat(nativeCorrectMat, new Rect(roi[0], roi[1], roi[2], roi[3]));
 		Mat t = new Mat();
 		temp.copyTo(t);
-		
-		HandleImgUtils.saveImg(t , "C:/Users/admin/Desktop/opencv/open/x/cutRect.jpg");
+
+		HandleImgUtils.saveImg(t, "C:/Users/admin/Desktop/opencv/open/x/cutRect.jpg");
 	}
-	
+
 	/**
 	 * 把矫正后的图像切割出来--辅助函数(修复)
-	 * @param rectPoint 矩形的四个点
+	 * 
+	 * @param rectPoint
+	 *            矩形的四个点
 	 * @return int[startLeft , startUp , width , height]
 	 */
 	public static int[] cutRectHelp(Point[] rectPoint) {
@@ -608,13 +926,13 @@ public class HandleImgUtils {
 		double maxX = rectPoint[0].x;
 		double minY = rectPoint[0].y;
 		double maxY = rectPoint[0].y;
-		for(int i = 1 ; i < rectPoint.length ; i++) {
+		for (int i = 1; i < rectPoint.length; i++) {
 			minX = rectPoint[i].x < minX ? rectPoint[i].x : minX;
 			maxX = rectPoint[i].x > maxX ? rectPoint[i].x : maxX;
 			minY = rectPoint[i].y < minY ? rectPoint[i].y : minY;
 			maxY = rectPoint[i].y > maxY ? rectPoint[i].y : maxY;
 		}
-		int[] roi = {(int)(minX) , (int)minY , (int)(maxX - minX) , (int)(maxY - minY)};
+		int[] roi = { (int) (minX), (int) minY, (int) (maxX - minX), (int) (maxY - minY) };
 		return roi;
 	}
 
@@ -632,13 +950,12 @@ public class HandleImgUtils {
 		RotatedRect rect = findMaxRect(cannyMat);
 
 		// 旋转矩形
-		Mat CorrectImg = rotation(cannyMat , rect);
-		Mat NativeCorrectImg = rotation(src , rect);
-		
-		
-		//裁剪矩形
-		cutRect(CorrectImg , NativeCorrectImg);
-		
+		Mat CorrectImg = rotation(cannyMat, rect);
+		Mat NativeCorrectImg = rotation(src, rect);
+
+		// 裁剪矩形
+		cutRect(CorrectImg, NativeCorrectImg);
+
 		HandleImgUtils.saveImg(src, "C:/Users/admin/Desktop/opencv/open/x/srcImg.jpg");
 
 		HandleImgUtils.saveImg(CorrectImg, "C:/Users/admin/Desktop/opencv/open/x/correct.jpg");
