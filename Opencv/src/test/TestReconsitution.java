@@ -114,8 +114,8 @@ public class TestReconsitution {
 	 * 测试矫正图像--旋转图像
 	 */
 	public void testCorrect() {
-		String imgPath = "C:/Users/admin/Desktop/opencv/open/reconsitution/x5.jpg";
-		String destPath = "C:/Users/admin/Desktop/opencv/open/reconsitution/";
+		String imgPath = "C:/Users/admin/Desktop/opencv/open/x/x8.jpg";
+		String destPath = "C:/Users/admin/Desktop/opencv/open/x/";
 		Mat src = ImgUtils.matFactory(imgPath);
 		src = ImgUtils.gray(src);
 		src = ImgUtils.correct(src);
