@@ -35,10 +35,10 @@ public class TestHoughLines {
 			double x1 = vec[0], y1 = vec[1], x2 = vec[2], y2 = vec[3];
 			Point start = new Point(x1, y1);
 			Point end = new Point(x2, y2);
-			Imgproc.line(grayMat, start, end, new Scalar(0, 255, 0), 1, Imgproc.LINE_4, 0);
+			Imgproc.line(grayMat, start, end, new Scalar(0, 0, 255), 1, Imgproc.LINE_4, 0);
 		}
 
-		HandleImgUtils.saveImg(grayMat, "C:/Users/admin/Desktop/opencv/open/q/a7-hough.png");
+		HandleImgUtils.saveImg(grayMat, "C:/Users/admin/Desktop/opencv/open/test/2/houghP.jpg");
 	}
 
 	// 标准hough直线
@@ -75,15 +75,15 @@ public class TestHoughLines {
 			}
 		}
 
-		HandleImgUtils.saveImg(grayMat,"C:/Users/admin/Desktop/opencv/open/q/a7-hough.png");
+		HandleImgUtils.saveImg(grayMat,"C:/Users/admin/Desktop/opencv/open/test/2/hough.jpg");
 
 	}
 
 	@Test
 	public void test() {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		Mat src = HandleImgUtils.matFactory("C:/Users/admin/Desktop/opencv/open/q/a7.png");
-		testHoughLines(src);
+		Mat src = HandleImgUtils.matFactory("C:/Users/admin/Desktop/opencv/open/test/2/2.jpg");
+		testHoughLinesP(src);
 
 	}
 }

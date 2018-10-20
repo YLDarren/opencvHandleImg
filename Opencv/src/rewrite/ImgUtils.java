@@ -1,7 +1,8 @@
-package reconsitution;
+package rewrite;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +33,7 @@ public class ImgUtils {
 	private static final Size dsize = new Size(32, 32);
 
 	// 私有化构造函数
-	private ImgUtils() {
-	};
+	private ImgUtils() {};
 
 	/**
 	 * 作用：输入图像路径，返回mat矩阵
@@ -129,7 +129,7 @@ public class ImgUtils {
 		}
 		return src;
 	}
-
+	
 	/**
 	 * 作用：自适应选取阀值
 	 * 
@@ -414,7 +414,7 @@ public class ImgUtils {
 		}
 		return src;
 	}
-	
+
 	/**
 	 * 统计图像每行/每列黑色像素点的个数 (n1,n2)=>(height,width),b=true;统计每行
 	 * (n1,n2)=>(width,height),b=false;统计每列
@@ -444,13 +444,15 @@ public class ImgUtils {
 		}
 		return xNum;
 	}
-	
+
 	/**
 	 * 水平投影法切割，仅适用于表格的图像(默认白底黑字)
-	 * @param src Mat矩阵对象
+	 * 
+	 * @param src
+	 *            Mat矩阵对象
 	 * @return
 	 */
-	public static List<Mat> cutImgX(Mat src){
+	public static List<Mat> cutImgX(Mat src) {
 		int i, j;
 		int width = getImgWidth(src), height = getImgHeight(src);
 		int[] xNum, cNum;
@@ -502,7 +504,6 @@ public class ImgUtils {
 		return YMat;
 	}
 
-	
 	/**
 	 * 垂直投影法切割，仅适用于表格的图像(默认白底黑字)
 	 * 
@@ -562,6 +563,154 @@ public class ImgUtils {
 		return XMat;
 	}
 
+	/**
+	 * 压缩像素值数量；即统计zipLine行像素值的数量为一行
+	 * @param num
+	 * @param zipLine
+	 */
+	public static int[] zipLinePixel(int[] num , int zipLine) {
+		int len = num.length / 3;
+		int[] result = new int[len];
+		int sum;
+		for(int i = 0 , j = 0; i < num.length && i + 2 < num.length; i += zipLine) {
+			sum = 0;
+			sum = num[i] + num[i + 1] + num[i + 2];
+			result[j++] = sum;
+		}
+		return result;
+	}
+	
+	/**
+	 * 水平投影法切割，适用于类似表格的图像(默认白底黑字)
+	 * 
+	 * @param src
+	 *            Mat矩阵对象
+	 * @return
+	 */
+	public static List<Mat> _cutImgX(Mat src) {
+		int i, j;
+		int width = getImgWidth(src), height = getImgHeight(src);
+		int[] xNum, cNum;
+		int average = 0;// 记录黑色像素和的平均值
+		
+		int zipLine = 3;
+		//压缩像素值数量；即统计三行像素值的数量为一行// 统计出每行黑色像素点的个数
+		xNum = zipLinePixel(countPixel(src, height, width, true) , zipLine);
+		
+		//排序
+		cNum = Arrays.copyOf(xNum, xNum.length);
+		Arrays.sort(cNum);
+		
+		for (i = 31 * cNum.length / 32; i < cNum.length; i++) {
+			average += cNum[i];
+		}
+		average /= (height / 32);
+
+//		System.out.println(average);
+		
+		// 把需要切割的y轴点存到cutY中
+		List<Integer> cutY = new ArrayList<Integer>();
+		for (i = 0; i < xNum.length; i++) {
+			if (xNum[i] > average) {
+				cutY.add(i * zipLine + 1);
+			}
+		}
+
+		// 优化cutY,把距离相差在30以内的都清除掉
+		if (cutY.size() != 0) {
+			int temp = cutY.get(cutY.size() - 1);
+			// 因为线条有粗细，优化cutY
+			for (i = cutY.size() - 2; i >= 0; i--) {
+				int k = temp - cutY.get(i);
+				if (k <= 30) {
+					cutY.remove(i + 1);
+				} else {
+					temp = cutY.get(i);
+				}
+			}
+			temp = cutY.get(cutY.size() - 1);
+			// 因为线条有粗细，优化cutY
+			for (i = cutY.size() - 2; i >= 0; i--) {
+				int k = temp - cutY.get(i);
+				if (k <= 30) {
+					cutY.remove(i + 1);
+				} else {
+					temp = cutY.get(i);
+				}
+			}
+		}
+		
+		
+//		// 把切割的图片保存到YMat中
+		List<Mat> YMat = new ArrayList<Mat>();
+		for (i = 1; i < cutY.size(); i++) {
+//			// 设置感兴趣区域
+			int startY = cutY.get(i - 1);
+			int h = cutY.get(i) - startY;
+//			System.out.println(startY);
+//			System.out.println(h);
+			Mat temp = new Mat(src, new Rect(0, startY, width, h));
+			Mat t = new Mat();
+			temp.copyTo(t);
+			YMat.add(t);
+		}
+		return YMat;
+	}
+	
+	
+	/**
+	 * 切割
+	 * @param src
+	 * @return
+	 */
+	public static void cut(Mat src){
+		Mat cannyMat = canny(src);
+		List<MatOfPoint> contours = findContours(cannyMat);
+		
+		
+		Mat rectMat = src.clone();
+		Scalar scalar = new Scalar(0 , 0 , 255);
+		for(int i = 0 ; i < contours.size() ; i++) {
+			MatOfPoint matOfPoint = contours.get(i);
+			MatOfPoint2f matOfPoint2f = new MatOfPoint2f(matOfPoint.toArray());
+			
+			RotatedRect rect = Imgproc.minAreaRect(matOfPoint2f);
+			
+			
+			Rect r = rect.boundingRect();
+			
+			
+			System.out.println(r.area() + " --- " + i);
+			
+			rectMat = paintRect(rectMat , r , scalar);
+			
+		}
+		
+		saveImg(rectMat , "C:/Users/admin/Desktop/opencv/open/test/12/rectMat.jpg");
+		
+	}
+	
+	/**
+	 * 画矩形
+	 * @param src
+	 * @param rect
+	 * @param scalar
+	 * @return
+	 */
+	public static Mat paintRect(Mat src , Rect r , Scalar scalar) {
+		Point pt1 = new Point(r.x , r.y);
+		Point pt2 = new Point(r.x + r.width , r.y);
+		Point pt3 = new Point(r.x + r.width , r.y + r.height);
+		Point pt4 = new Point(r.x , r.y + r.height);
+		
+		Imgproc.line(src, pt1, pt2, scalar , 5);
+		Imgproc.line(src, pt2, pt3, scalar , 5);
+		Imgproc.line(src, pt3, pt4, scalar , 5);
+		Imgproc.line(src, pt4, pt1, scalar , 5);
+		
+		return src;
+	}
+	
 	/**
 	 * 确定图像内容startUp的位置
 	 * 
@@ -657,7 +806,7 @@ public class ImgUtils {
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * 裁剪图像，主要使切割图像的内容更靠中间(即去除内容周边的空白)
 	 * 
@@ -709,56 +858,66 @@ public class ImgUtils {
 	public static Mat canny(Mat src) {
 		Mat mat = src.clone();
 		Imgproc.Canny(src, mat, 60, 200);
-//		saveImg(mat, "C:/Users/admin/Desktop/opencv/open/x/canny.jpg");
+		// saveImg(mat, "C:/Users/admin/Desktop/opencv/open/x/canny.jpg");
 		return mat;
 	}
 
-	
-	/**
-	 * 寻找轮廓
-	 * @param cannyMat
-	 * @return
-	 */
 	public static List<MatOfPoint> findContours(Mat cannyMat){
 		List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
 		Mat hierarchy = new Mat();
 
 		// 寻找轮廓
-		Imgproc.findContours(cannyMat, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_NONE,
+		Imgproc.findContours(cannyMat, contours, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE,
 				new Point(0, 0));
 		
 		if(contours.size() <= 0) {
-			throw new RuntimeException("未找到轮廓");
+			throw new RuntimeException("未找到图像轮廓");
 		}else {
+			//对contours进行了排序，按递减顺序
+			contours.sort(new Comparator<MatOfPoint>() {
+				@Override
+				public int compare(MatOfPoint o1, MatOfPoint o2) {
+					MatOfPoint2f mat1 = new MatOfPoint2f(o1.toArray());
+					RotatedRect rect1 = Imgproc.minAreaRect(mat1);
+					Rect r1 = rect1.boundingRect();
+					
+					MatOfPoint2f mat2 = new MatOfPoint2f(o2.toArray());
+					RotatedRect rect2 = Imgproc.minAreaRect(mat2);
+					Rect r2 = rect2.boundingRect();
+					
+					return (int)(r1.area() - r2.area());
+				}
+			});
 			return contours;
 		}
 	}
 	
-	
 	/**
 	 * 作用：返回边缘检测之后的最大轮廓
-	 * @param cannyMat Canny之后的Mat矩阵
+	 * 
+	 * @param cannyMat
+	 *            Canny之后的Mat矩阵
 	 * @return
 	 */
 	public static MatOfPoint findMaxContour(Mat cannyMat) {
 		List<MatOfPoint> contours = findContours(cannyMat);
-		
-		// 找出匹配到的最大轮廓
-		double area = Imgproc.boundingRect(contours.get(0)).area();
-		int index = 0;
 
 		// 找出匹配到的最大轮廓
-		for (int i = 0; i < contours.size(); i++) {
-			double tempArea = Imgproc.boundingRect(contours.get(i)).area();
-			if (tempArea > area) {
-				area = tempArea;
-				index = i;
-			}
-		}
-		
-		return contours.get(index);
+//		double area = Imgproc.boundingRect(contours.get(0)).area();
+//		int index = 0;
+
+		// 找出匹配到的最大轮廓
+//		for (int i = 0; i < contours.size(); i++) {
+//			double tempArea = Imgproc.boundingRect(contours.get(i)).area();
+//			if (tempArea > area) {
+//				area = tempArea;
+//				index = i;
+//			}
+//		}
+
+		return contours.get(contours.size() - 1);
 	}
-	
+
 	/**
 	 * 返回边缘检测之后的最大矩形
 	 * 
@@ -768,7 +927,7 @@ public class ImgUtils {
 	 */
 	public static RotatedRect findMaxRect(Mat cannyMat) {
 		MatOfPoint maxContour = findMaxContour(cannyMat);
-		
+
 		MatOfPoint2f matOfPoint2f = new MatOfPoint2f(maxContour.toArray());
 
 		RotatedRect rect = Imgproc.minAreaRect(matOfPoint2f);
@@ -782,19 +941,21 @@ public class ImgUtils {
 	 * @param cannyMat
 	 */
 	public static Point[] useApproxPolyDPFindPoints(Mat cannyMat) {
-		return useApproxPolyDPFindPoints(cannyMat , 0.01);
+		return useApproxPolyDPFindPoints(cannyMat, 0.01);
 	}
-	
+
 	/**
 	 * 利用函数approxPolyDP来对指定的点集进行逼近 精确度设置好，效果还是比较好的
+	 * 
 	 * @param cannyMat
-	 * @param threshold 阀值(精确度)
+	 * @param threshold
+	 *            阀值(精确度)
 	 * @return
 	 */
-	public static Point[] useApproxPolyDPFindPoints(Mat cannyMat , double threshold) {
+	public static Point[] useApproxPolyDPFindPoints(Mat cannyMat, double threshold) {
 
 		MatOfPoint maxContour = findMaxContour(cannyMat);
-		
+
 		MatOfPoint2f approxCurve = new MatOfPoint2f();
 		MatOfPoint2f matOfPoint2f = new MatOfPoint2f(maxContour.toArray());
 
@@ -805,7 +966,7 @@ public class ImgUtils {
 
 		return points;
 	}
-	
+
 	/**
 	 * 把点击划分到四个区域中，即左上，右上，右下，左下
 	 * 
@@ -849,6 +1010,37 @@ public class ImgUtils {
 	}
 
 	/**
+	 * 优化点集(利用两点之间的距离)
+	 * 
+	 * @param points
+	 * @return
+	 */
+	public static List<Point> optimizeAreaPoints(List<Point> points) {
+		int len = points.size();
+		double d = pointDistance(points.get(len - 1), points.get(len - 2));
+		double d1 = -1;
+		for (int i = len - 2; i > 0; i--) {
+			d1 = pointDistance(points.get(i), points.get(i - 1));
+			if (d1 <= d) {
+				points.remove(i + 1);
+			}
+			d = d1;
+		}
+		return points;
+	}
+
+	/**
+	 * 计算两个点之间的距离
+	 * 
+	 * @param p1
+	 * @param p2
+	 * @return
+	 */
+	public static double pointDistance(Point p1, Point p2) {
+		return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
+	}
+
+	/**
 	 * 获取四个顶点的参照点，返回Point数组[左上，右上，右下，左下] 思路： 我们可以把四个点分成两部分，左部分，右部分
 	 * 左部分：高的为左上，低的为左下(高低是以人的视觉) 右部分同理 首先我们找到最左和最右的位置，以它们的两个中间为分界点，
 	 * 靠左的划分到左部分，靠右的划分到右部分 如果一个区域有三个或更多，哪个比较靠近分界线，划分到少的那个区域
@@ -856,7 +1048,7 @@ public class ImgUtils {
 	 * @param cannyMat
 	 * @return
 	 */
-	public static Point[] findReferencePoint(Mat cannyMat) {
+	public static Point[] findReferencePoint_old(Mat cannyMat) {
 		RotatedRect rect = findMaxRect(cannyMat);
 		Point[] referencePoints = new Point[4];
 		rect.points(referencePoints);
@@ -927,6 +1119,207 @@ public class ImgUtils {
 	}
 
 	/**
+	 * 获取四个顶点的参照点，返回Point数组[左上，右上，右下，左下]
+	 * 
+	 * @param cannyMat
+	 * @return
+	 */
+	public static Point[] findReferencePoint(Mat cannyMat) {
+		RotatedRect rect = findMaxRect(cannyMat);
+		Point[] referencePoints = new Point[4];
+		rect.points(referencePoints);
+
+		Point center = rect.center;
+
+		// 根据第0下标得点在center得位置得偏向，确定4个方位得点
+		double xDeviation = referencePoints[0].x - center.x;
+		double yDeviation = referencePoints[0].y - center.y;
+		int firstIndex = -1;// 确定第一个点得准确方位
+		if (xDeviation < 0) {
+			if (yDeviation < 0) {
+				firstIndex = 0;// 左上
+			} else {
+				firstIndex = 3;// 左下
+			}
+		} else {
+			if (yDeviation < 0) {
+				firstIndex = 1;// 右上
+			} else {
+				firstIndex = 2;// 右下
+			}
+		}
+
+		// System.out.println("firstIndex = " + firstIndex);
+
+		Point[] result = new Point[4];
+		for (int i = firstIndex, j = 0; j < 4; i = i % 4) {
+			result[i++] = referencePoints[j++];
+		}
+
+		for (Point p : result) {
+			p.y = Math.abs(p.y);
+			p.x = Math.abs(p.x);
+		}
+
+		return result;
+	}
+
+	/**
+	 * 优化参考点集合
+	 * 
+	 * @param referencePoints
+	 *            参照点
+	 * @param src
+	 *            图像Mat矩阵
+	 * @return
+	 */
+	public static Point[] optimizeReferencePoint(Point[] referencePoints, Mat cannyMat) {
+		int value = -1;
+		int width = 50;
+		boolean change = false;
+		int pointx = (int) referencePoints[0].x;
+		int pointy = (int) referencePoints[0].y;
+		int imgWidth = getImgWidth(cannyMat);
+		int imgHeight = getImgHeight(cannyMat);
+		int i = pointx, j = pointy;
+		// 优化左上点
+		for (; i < pointx + width; i++) {
+			if (i >= imgWidth) {
+				change = true;
+				referencePoints[0].x = i;
+				referencePoints[0].y = j;
+				break;
+			}
+			for (; j < pointy + width; j++) {
+				if (j >= imgHeight) {
+					change = true;
+					referencePoints[0].x = i;
+					referencePoints[0].y = j;
+					continue;
+				}
+				value = getPixel(cannyMat, j, i);
+				if (value == 255) {
+					change = true;
+					referencePoints[0].x = i;
+					referencePoints[0].y = j;
+					break;
+				}
+			}
+		}
+		if (!change) {
+			referencePoints[0].y = pointy + width;
+			referencePoints[0].x = pointx + width;
+		}
+		// .......
+
+		change = false;
+		pointx = (int) referencePoints[1].x;
+		pointy = (int) referencePoints[1].y;
+		i = pointx;
+		j = pointy;
+		// 优化右上
+		for (; i > pointx - width; i--) {
+			if (i <= 0) {
+				change = true;
+				referencePoints[1].x = i;
+				referencePoints[1].y = j;
+				break;
+			}
+			for (; j < pointy + width; j++) {
+				if (j >= imgHeight) {
+					change = true;
+					referencePoints[1].x = i;
+					referencePoints[1].y = j;
+					continue;
+				}
+				value = getPixel(cannyMat, j, i);
+				if (value == 255) {
+					change = true;
+					referencePoints[1].x = i;
+					referencePoints[1].y = j;
+					break;
+				}
+			}
+		}
+		if (!change) {
+			referencePoints[1].y = pointy + width;
+			referencePoints[1].x = pointx - width;
+		}
+		// .......
+
+		change = false;
+		pointx = (int) referencePoints[2].x;
+		pointy = (int) referencePoints[2].y;
+		i = pointx;
+		j = pointy;
+		// 优化右下
+		for (; i > pointx - width; i--) {
+			if (i <= 0) {
+				change = true;
+				referencePoints[2].x = i;
+				referencePoints[2].y = j;
+				break;
+			}
+			for (; j > pointy - width; j--) {
+				if (j <= 0) {
+					change = true;
+					referencePoints[2].x = i;
+					referencePoints[2].y = j;
+					continue;
+				}
+				value = getPixel(cannyMat, j, i);
+				if (value == 255) {
+					change = true;
+					referencePoints[2].x = i;
+					referencePoints[2].y = j;
+					break;
+				}
+			}
+		}
+		if (!change) {
+			referencePoints[2].y = pointy - width;
+			referencePoints[2].x = pointx - width;
+		}
+		// .......
+
+		change = false;
+		pointx = (int) referencePoints[3].x;
+		pointy = (int) referencePoints[3].y;
+		i = pointx;
+		j = pointy;
+		// 优化左下
+		for (; i < pointx + width; i--) {
+			if (i >= imgWidth) {
+				change = true;
+				referencePoints[3].x = i;
+				referencePoints[3].y = j;
+				break;
+			}
+			for (; j > pointy - width; j--) {
+				if (j <= 0) {
+					change = true;
+					referencePoints[3].x = i;
+					referencePoints[3].y = j;
+					continue;
+				}
+				value = getPixel(cannyMat, j, i);
+				if (value == 255) {
+					change = true;
+					referencePoints[3].x = i;
+					referencePoints[3].y = j;
+					break;
+				}
+			}
+		}
+		if (!change) {
+			referencePoints[3].y = pointy - width;
+			referencePoints[3].x = pointx + width;
+		}
+
+		return referencePoints;
+	}
+
+	/**
 	 * 具体的寻找四个顶点的坐标
 	 * 
 	 * @param map
@@ -940,10 +1333,10 @@ public class ImgUtils {
 		List<Point> py1 = map.get("py1");// 右上
 		List<Point> py2 = map.get("py2");// 右下
 
-		System.out.println("px1.size() " + px1.size());
-		System.out.println("px2.size() " + px2.size());
-		System.out.println("py1.size() " + py1.size());
-		System.out.println("py2.size() " + py2.size());
+		// System.out.println("px1.size() " + px1.size());
+		// System.out.println("px2.size() " + px2.size());
+		// System.out.println("py1.size() " + py1.size());
+		// System.out.println("py2.size() " + py2.size());
 
 		double maxDistance = 0;
 		double tempDistance;
@@ -952,8 +1345,8 @@ public class ImgUtils {
 		// 寻找左上，右下
 		for (i = 0; i < px1.size(); i++) {
 			for (j = 0; j < py2.size(); j++) {
-				tempDistance = Math.pow(px1.get(i).x - py2.get(j).x, 2) + Math.pow(px1.get(i).y - py2.get(j).y, 2);
-				if (tempDistance > maxDistance) {
+				tempDistance = pointDistance(py2.get(j), px1.get(i));
+				if (tempDistance >= maxDistance) {
 					maxDistance = tempDistance;
 					p1 = i;
 					p2 = j;
@@ -967,8 +1360,8 @@ public class ImgUtils {
 		maxDistance = 0;
 		for (i = 0; i < px2.size(); i++) {
 			for (j = 0; j < py1.size(); j++) {
-				tempDistance = Math.pow(px2.get(i).x - py1.get(j).x, 2) + Math.pow(px2.get(i).y - py1.get(j).y, 2);
-				if (tempDistance > maxDistance) {
+				tempDistance = pointDistance(py1.get(j), px2.get(i));
+				if (tempDistance >= maxDistance) {
 					maxDistance = tempDistance;
 					p1 = i;
 					p2 = j;
@@ -989,54 +1382,107 @@ public class ImgUtils {
 	public static Point[] findFourPoint(Mat src) {
 		// 1、canny描边
 		Mat cannyMat = canny(src);
+
+		// saveImg(cannyMat, "C:/Users/admin/Desktop/opencv/open/test/1/canny.jpg");
+
 		// 2、寻找最大轮廓;3、对最大轮廓点集合逼近，得到轮廓的大致点集合
 		Point[] points = useApproxPolyDPFindPoints(cannyMat);
-		
-		//在图像上画出逼近的点
-		Mat approxPolyMat = src.clone();
-		for( int i = 0; i < points.length ; i++) {
-			setPixel(approxPolyMat, (int)points[i].y, (int) points[i].x, 255);
-		}
-		
-//		saveImg(approxPolyMat, "C:/Users/admin/Desktop/opencv/open/q/x11-approxPolyMat.jpg");
-		
+
+		// ................调试 //在图像上画出逼近的点
+		// Mat approxPolyMat = src.clone();
+		// Boolean b = paintCircle(approxPolyMat, points, 5, new Scalar(0, 0, 255),
+		// "C:/Users/admin/Desktop/opencv/open/test/2/point.jpg");
+		// System.out.println(b);
+		// .................
+
 		// 获取参照点集
 		Point[] referencePoints = findReferencePoint(cannyMat);
+
+		referencePoints = optimizeReferencePoint(referencePoints, cannyMat);
+
+		// ................调试
+		// Mat referenceMat = src.clone();
+		// Imgproc.circle(referenceMat, referencePoints[0], 5, new Scalar(255, 0, 0),
+		// -1);
+		// Imgproc.circle(referenceMat, referencePoints[1], 5, new Scalar(0, 255, 0),
+		// -1);
+		// Imgproc.circle(referenceMat, referencePoints[2], 5, new Scalar(0, 0, 255),
+		// -1);
+		// Imgproc.circle(referenceMat, referencePoints[3], 5, new Scalar(255, 255, 0),
+		// -1);
+		//
+		// saveImg(referenceMat,"C:/Users/admin/Desktop/opencv/open/test/2/referenceMat.jpg");
+
+		// ................调试
 
 		// 4、把点击划分到四个区域中，即左上，右上，左下，右下(效果还可以)
 		Map<String, List> map = pointsDivideArea(points, referencePoints);
 
+		// 优化点集
+		map.put("px1", optimizeAreaPoints(map.get("px1")));
+		map.put("px2", optimizeAreaPoints(map.get("px2")));
+		map.put("py1", optimizeAreaPoints(map.get("py1")));
+		map.put("py2", optimizeAreaPoints(map.get("py2")));
+
+		// ..............调试
 		// 画出标记四个区域中的点集
-		Mat areaMat = src.clone();
-		List<Point> px1 = map.get("px1");// 左上
-		List<Point> px2 = map.get("px2");// 左下
-		List<Point> py1 = map.get("py1");// 右上
-		List<Point> py2 = map.get("py2");// 右下
-
-		for (int i = 0; i < px1.size(); i++) {
-			setPixel(areaMat, (int) px1.get(i).y, (int) px1.get(i).x, 255);
-		}
-
-		for (int i = 0; i < px2.size(); i++) {
-			setPixel(areaMat, (int) px2.get(i).y, (int) px2.get(i).x, 255);
-		}
-
-		for (int i = 0; i < py1.size(); i++) {
-			setPixel(areaMat, (int) py1.get(i).y, (int) py1.get(i).x, 255);
-		}
-
-		for (int i = 0; i < py2.size(); i++) {
-			setPixel(areaMat, (int) py2.get(i).y, (int) py2.get(i).x, 255);
-		}
-
-//		saveImg(areaMat, "C:/Users/admin/Desktop/opencv/open/q/x11-pointsDivideArea.jpg");
+		// Mat areaMat = src.clone();
+		// List<Point> px1 = map.get("px1");// 左上
+		// List<Point> px2 = map.get("px2");// 左下
+		// List<Point> py1 = map.get("py1");// 右上
+		// List<Point> py2 = map.get("py2");// 右下
+		// for(Point p1 : px1) {
+		// Imgproc.circle(areaMat, p1, 5, new Scalar(255, 0, 0),-1);
+		// }
+		// for(Point p1 : px2) {
+		// Imgproc.circle(areaMat, p1, 5, new Scalar(0, 255, 0),-1);
+		// }
+		// for(Point p1 : py1) {
+		// Imgproc.circle(areaMat, p1, 5, new Scalar(0, 0, 255),-1);
+		// }
+		// for(Point p1 : py2) {
+		// Imgproc.circle(areaMat, p1, 5, new Scalar(0, 255, 255),-1);
+		// }
+		// saveImg(areaMat , "C:/Users/admin/Desktop/opencv/open/test/2/areaMat.jpg");
+		// ..............调试
 
 		// 5、根据矩形中，对角线最长，找到矩形的四个顶点坐标(效果不好)
 		Point[] result = specificFindFourPoint(map);
+		
+		//优化四个点
+		result = optimizeFourPoint(src , result);
+		
+		// .........调试
+//		Mat fourMat = src.clone();
+//		Imgproc.circle(fourMat, result[0], 5, new Scalar(255, 0, 0), -1);
+//		Imgproc.circle(fourMat, result[1], 5, new Scalar(0, 255, 0), -1);
+//		Imgproc.circle(fourMat, result[2], 5, new Scalar(0, 0, 255), -1);
+//		Imgproc.circle(fourMat, result[3], 5, new Scalar(255, 0, 255), -1);
+//		saveImg(fourMat, "C:/Users/admin/Desktop/opencv/open/test/2/fourMat.jpg");
+		// .........调试
+		
 
 		return result;
+
 	}
 
+	public static Point[] optimizeFourPoint(Mat src , Point[] result) {
+		
+		Imgproc.line(src, result[0], result[3], new Scalar(0 , 0 , 255) , 3);//左竖线
+		Imgproc.line(src, result[1], result[2], new Scalar(0 , 0 , 255) , 3);//右竖线
+		Imgproc.line(src, result[0], result[1], new Scalar(0 , 0 , 255) , 3);//上横线
+		Imgproc.line(src, result[2], result[3], new Scalar(0 , 0 , 255) , 3);//下横线
+		
+		
+		
+		
+		saveImg(src , "C:/Users/admin/Desktop/opencv/open/test/2/lineMat.jpg");
+		
+		
+		return result;
+	}
+	
+	
 	/**
 	 * 透视变换，矫正图像 思路： 1、寻找图像的四个顶点的坐标(重要) 思路： 1、canny描边 2、寻找最大轮廓
 	 * 3、对最大轮廓点集合逼近，得到轮廓的大致点集合 4、把点击划分到四个区域中，即左上，右上，左下，右下 5、根据矩形中，对角线最长，找到矩形的四个顶点坐标
@@ -1045,13 +1491,12 @@ public class ImgUtils {
 	 * @param src
 	 */
 	public static Mat warpPerspective(Mat src) {
-		// 灰度话
-		src = gray(src);
+		// Canny
+		Mat cannyMat = canny(src);
+
 		// 找到四个点
 		Point[] points = findFourPoint(src);
 
-		// Canny
-		Mat cannyMat = canny(src);
 		// 寻找最大矩形
 		RotatedRect rect = findMaxRect(cannyMat);
 
@@ -1059,13 +1504,16 @@ public class ImgUtils {
 		List<Point> listSrcs = java.util.Arrays.asList(points[0], points[1], points[2], points[3]);
 		Mat srcPoints = Converters.vector_Point_to_Mat(listSrcs, CvType.CV_32F);
 
-		Rect r = rect.boundingRect();
-		r.x = Math.abs(r.x);
-		r.y = Math.abs(r.y);
-		List<Point> listDsts = java.util.Arrays.asList(new Point(r.x, r.y), new Point(r.x + r.width, r.y),
-				new Point(r.x + r.width, r.y + r.height), new Point(r.x, r.y + r.height));
+//		Rect r = rect.boundingRect();
+//		r.x = Math.abs(r.x);
+//		r.y = Math.abs(r.y);
+//		List<Point> listDsts = java.util.Arrays.asList(new Point(r.x, r.y), new Point(r.x + r.width, r.y),
+//				new Point(r.x + r.width, r.y + r.height), new Point(r.x, r.y + r.height));
+		
+		List<Point> listDsts = java.util.Arrays.asList(new Point(0, 0), new Point(src.width(), 0),
+				new Point(src.width(), src.height()), new Point(0, src.height()));
 
-		System.out.println(r.x + "," + r.y);
+//		System.out.println(r.x + "," + r.y);
 
 		Mat dstPoints = Converters.vector_Point_to_Mat(listDsts, CvType.CV_32F);
 
@@ -1075,7 +1523,7 @@ public class ImgUtils {
 
 		Imgproc.warpPerspective(src, dst, perspectiveMmat, src.size(), Imgproc.INTER_LINEAR + Imgproc.WARP_INVERSE_MAP,
 				1, new Scalar(0));
-		
+
 		return dst;
 
 	}
@@ -1097,6 +1545,23 @@ public class ImgUtils {
 		double angle = rect.angle + 90;
 
 		Point center = rect.center;
+		/**
+		 * //................调试使用 if(cannyMat.channels() == 3) { Mat tempMat =
+		 * cannyMat.clone(); for(Point p : rectPoint) { p.y = Math.abs(p.y); p.x =
+		 * Math.abs(p.x); }
+		 * 
+		 * Imgproc.circle(tempMat, rectPoint[0], 30, new Scalar(0, 0, 255) , -1);
+		 * Imgproc.circle(tempMat, rectPoint[1], 30, new Scalar(0, 0, 255) , -1);
+		 * Imgproc.circle(tempMat, rectPoint[2], 30, new Scalar(0, 0, 255) , -1);
+		 * Imgproc.circle(tempMat, rectPoint[3], 30, new Scalar(0, 0, 255) , -1);
+		 * Imgproc.circle(tempMat, center, 30, new Scalar(0, 255, 0) , -1);
+		 * 
+		 * saveImg(tempMat ,
+		 * "C:/Users/admin/Desktop/opencv/open/test/1/five-point.jpg"); }
+		 * 
+		 * //...............
+		 * 
+		 */
 
 		Mat CorrectImg = new Mat(cannyMat.size(), cannyMat.type());
 
@@ -1129,7 +1594,7 @@ public class ImgUtils {
 		Mat t = new Mat();
 		temp.copyTo(t);
 
-//		saveImg(t, "C:/Users/admin/Desktop/opencv/open/x/cutRect.jpg");
+		// saveImg(t, "C:/Users/admin/Desktop/opencv/open/x/cutRect.jpg");
 		return t;
 	}
 
@@ -1151,7 +1616,8 @@ public class ImgUtils {
 			minY = rectPoint[i].y < minY ? rectPoint[i].y : minY;
 			maxY = rectPoint[i].y > maxY ? rectPoint[i].y : maxY;
 		}
-		int[] roi = { (int) (minX), (int) minY, (int) (maxX - minX), (int) (maxY - minY) };
+		int[] roi = { (int) Math.abs(minX), (int) Math.abs(minY), (int) Math.abs(maxX - minX),
+				(int) Math.abs(maxY - minY) };
 		return roi;
 	}
 
@@ -1175,15 +1641,38 @@ public class ImgUtils {
 		// 裁剪矩形
 		Mat dst = cutRect(CorrectImg, NativeCorrectImg);
 
-//		saveImg(src, "C:/Users/admin/Desktop/opencv/open/x/srcImg.jpg");
+		// saveImg(src, "C:/Users/admin/Desktop/opencv/open/x/srcImg.jpg");
 
-//		saveImg(CorrectImg, "C:/Users/admin/Desktop/opencv/open/x/correct.jpg");
+		// saveImg(CorrectImg, "C:/Users/admin/Desktop/opencv/open/x/correct.jpg");
 		return dst;
 	}
-	
-	
-	
-	
-	
-	
+
+	/**
+	 * 画实心圆
+	 * 
+	 * @param src
+	 * @param point
+	 *            点
+	 * @param size
+	 *            点的尺寸
+	 * @param scalar
+	 *            颜色
+	 * @param path
+	 *            保存路径
+	 */
+	public static boolean paintCircle(Mat src, Point[] point, int size, Scalar scalar, String path) {
+		if (src == null || point == null) {
+			throw new RuntimeException("Mat 或者 Point 数组不能为NULL");
+		}
+		for (Point p : point) {
+			Imgproc.circle(src, p, size, scalar, -1);
+		}
+
+		if (path != null && !"".equals(path)) {
+			return saveImg(src, path);
+		}
+
+		return false;
+	}
+
 }

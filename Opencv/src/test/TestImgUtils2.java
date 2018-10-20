@@ -36,12 +36,12 @@ public class TestImgUtils2 {
 	 * 测试透视变换矫正图像
 	 */
 	public void testWarpPerspective() {
-		String num = "6";
+		String num = "2";
 		String imgPath = "C:/Users/admin/Desktop/opencv/open/test/" + num + "/correct-" + num + ".jpg";
-		// String destPath = "C:/Users/admin/Desktop/opencv/open/test/" + num + "/";
+		 String destPath = "C:/Users/admin/Desktop/opencv/open/test/" + num + "/";
 		Mat src = ImgUtils2.matFactory(imgPath);
 		src = ImgUtils2.warpPerspective(src);
-		// ImgUtils2.saveImg(src, destPath + "warpPerspective.jpg");
+		 ImgUtils2.saveImg(src, destPath + "warpPerspective.jpg");
 	}
 
 	
