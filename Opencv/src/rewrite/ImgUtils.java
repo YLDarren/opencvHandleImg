@@ -569,12 +569,14 @@ public class ImgUtils {
 	 * @param zipLine
 	 */
 	public static int[] zipLinePixel(int[] num , int zipLine) {
-		int len = num.length / 3;
+		int len = num.length / zipLine;
 		int[] result = new int[len];
 		int sum;
-		for(int i = 0 , j = 0; i < num.length && i + 2 < num.length; i += zipLine) {
+		for(int i = 0 , j = 0; i < num.length && i + zipLine < num.length; i += zipLine) {
 			sum = 0;
-			sum = num[i] + num[i + 1] + num[i + 2];
+			for(int k = 0 ; k < zipLine ; k++) {
+				sum += num[i + k];
+			}
 			result[j++] = sum;
 		}
 		return result;
@@ -582,7 +584,7 @@ public class ImgUtils {
 	
 	/**
 	 * 水平投影法切割，适用于类似表格的图像(默认白底黑字)
-	 * 
+	 * 改进
 	 * @param src
 	 *            Mat矩阵对象
 	 * @return
@@ -659,6 +661,77 @@ public class ImgUtils {
 	
 	
 	/**
+	 * 垂直投影法切割，适用于类似表格的图像(默认白底黑字)
+	 * 改进
+	 * @param src
+	 *            Mat矩阵对象
+	 * @return
+	 */
+	public static List<Mat> _cutImgY(Mat src) {
+		int i, j;
+		int width = getImgWidth(src), height = getImgHeight(src);
+		int[] yNum, cNum;
+		int average = 0;// 记录黑色像素和的平均值
+		
+		int zipLine = 2;
+		//压缩像素值数量；即统计三行像素值的数量为一行// 统计出每列黑色像素点的个数
+		yNum = zipLinePixel(countPixel(src, width, height, false) , zipLine);
+
+		// 经过测试这样得到的平均值最优，平均值的选取很重要
+		cNum = Arrays.copyOf(yNum, yNum.length);
+		Arrays.sort(cNum);
+		for (i = 31 * cNum.length / 32; i < cNum.length; i++) {
+			average += cNum[i];
+		}
+		average /= (cNum.length / 32);
+
+		// 把需要切割的x轴的点存到cutX中
+		List<Integer> cutX = new ArrayList<Integer>();
+		for (i = 0; i < yNum.length ; i++ ) {
+			if (yNum[i] >= average) {
+				cutX.add(i * zipLine + 2);
+			}
+		}
+
+		// 优化cutX
+		if (cutX.size() != 0) {
+			int temp = cutX.get(cutX.size() - 1);
+			// 因为线条有粗细，优化cutX
+			for (i = cutX.size() - 2; i >= 0; i--) {
+				int k = temp - cutX.get(i);
+				if (k <= 100) {
+					cutX.remove(i);
+				} else {
+					temp = cutX.get(i);
+				}
+			}
+			temp = cutX.get(cutX.size() - 1);
+			// 因为线条有粗细，优化cutX
+			for (i = cutX.size() - 2; i >= 0; i--) {
+				int k = temp - cutX.get(i);
+				if (k <= 100) {
+					cutX.remove(i);
+				} else {
+					temp = cutX.get(i);
+				}
+			}
+		}
+		
+		// 把切割的图片都保存到XMat中
+		List<Mat> XMat = new ArrayList<Mat>();
+		for (i = 1; i < cutX.size(); i++) {
+			// 设置感兴趣的区域
+			int startX = cutX.get(i - 1);
+			int w = cutX.get(i) - startX;
+			Mat temp = new Mat(src, new Rect(startX, 0, w, height));
+			Mat t = new Mat();
+			temp.copyTo(t);
+			XMat.add(t);
+		}
+		return XMat;
+	}
+	
+	/**
 	 * 切割
 	 * @param src
 	 * @return
@@ -670,12 +743,11 @@ public class ImgUtils {
 		
 		Mat rectMat = src.clone();
 		Scalar scalar = new Scalar(0 , 0 , 255);
-		for(int i = 0 ; i < contours.size() ; i++) {
+		for(int i = contours.size() - 1 ; i > contours.size() - 5 ; i--) {
 			MatOfPoint matOfPoint = contours.get(i);
 			MatOfPoint2f matOfPoint2f = new MatOfPoint2f(matOfPoint.toArray());
 			
 			RotatedRect rect = Imgproc.minAreaRect(matOfPoint2f);
-			
 			
 			Rect r = rect.boundingRect();
 			
@@ -873,7 +945,7 @@ public class ImgUtils {
 		if(contours.size() <= 0) {
 			throw new RuntimeException("未找到图像轮廓");
 		}else {
-			//对contours进行了排序，按递减顺序
+			//对contours进行了排序，按递增顺序
 			contours.sort(new Comparator<MatOfPoint>() {
 				@Override
 				public int compare(MatOfPoint o1, MatOfPoint o2) {
