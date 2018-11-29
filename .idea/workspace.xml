@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="edf66757-1fec-47e5-9157-25b3dd81f976" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Opencv/src/test/TestCorrect.java" beforeDir="false" afterPath="$PROJECT_DIR$/Opencv/src/test/TestCorrect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Opencv/src/test/TestImageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/Opencv/src/test/TestImageUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Opencv/src/utils/HandleImgUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/Opencv/src/utils/HandleImgUtils.java" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ImageOpencvUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2432">
+              <caret line="128" column="11" selection-start-line="128" selection-start-column="11" selection-end-line="128" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestBinaryUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/TestBinaryUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="247">
+                <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>C:/Users/admin/Desktop/opencv/open/</find>
+      <find>correct</find>
+      <find>appro</find>
+      <find>C:/Users/admin/Desktop/opencv/open/product</find>
+      <find>findCon</find>
+      <find>findCoon</find>
+      <find>findCo</find>
+      <find>resize</find>
+      <find>cut</find>
+      <find>\\</find>
+      <find>Row</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>C:\Users\X240\Desktop\opencv\x</replace>
+      <replace>$USER_HOME$/Desktop/opencv/product</replace>
+      <replace>/</replace>
+      <replace>Col</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Opencv/src/utils/HandleImgUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/test/TestCorrect.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/test/TestDistortion.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/test/TestImageUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/test/TestReconsitution.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/reconsitution/ImgUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/rewrite/ImgUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/rewrite/TestRewrite.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/MathUtils/MathUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/old/test/TestImgUtils2.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/old/test/TestReconsitution.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/product/TestProduct.java" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/GeneralUtils/GeneralUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/BinaryUtils/README.md" />
+        <option value="$PROJECT_DIR$/Opencv/src/BinaryUtils/BinaryUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/GrayUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/TestGrayUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/README.md" />
+        <option value="$PROJECT_DIR$/Opencv/src/BinaryUtils/TestBinaryUtils.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="G:/maven/apache-maven-3.5.4" />
+        <option name="userSettingsFile" value="G:\maven\apache-maven-3.5.4\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="676" />
+    <option name="width" value="697" />
+    <option name="height" value="735" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Opencv" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Opencv" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Opencv" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="BinaryUtils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="H:\ideaCode\opencvHandleImg\Opencv\src\GrayUtils\img\test3\test1" />
+      <recent name="H:\ideaCode\opencvHandleImg\Opencv\src\CutUtils" />
+      <recent name="H:\ideaCode\opencvHandleImg\Opencv\src\BinaryUtils" />
+      <recent name="H:\ideaCode\opencvHandleImg\Opencv\src\GrayUtils\img" />
+      <recent name="H:\ideaCode\opencvHandleImg\Opencv\src\old" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.TestBinaryUtils.testPartBinaryzation">
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="TestBinaryUtils.testBinaryNative" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Opencv" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="BinaryUtils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="BinaryUtils" />
+      <option name="MAIN_CLASS_NAME" value="BinaryUtils.TestBinaryUtils" />
+      <option name="METHOD_NAME" value="testBinaryNative" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="TestBinaryUtils.testBinaryzation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Opencv" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="BinaryUtils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="BinaryUtils" />
+      <option name="MAIN_CLASS_NAME" value="BinaryUtils.TestBinaryUtils" />
+      <option name="METHOD_NAME" value="testBinaryzation" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="TestBinaryUtils.testPartBinaryzation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Opencv" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="BinaryUtils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="BinaryUtils" />
+      <option name="MAIN_CLASS_NAME" value="BinaryUtils.TestBinaryUtils" />
+      <option name="METHOD_NAME" value="testPartBinaryzation" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="TestGrayUtils.testgrayColByAdapThreshold" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Opencv" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GrayUtils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="GrayUtils" />
+      <option name="MAIN_CLASS_NAME" value="GrayUtils.TestGrayUtils" />
+      <option name="METHOD_NAME" value="testgrayColByAdapThreshold" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="TestGrayUtils.testgrayColByPartAdapThreshold" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Opencv" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GrayUtils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="GrayUtils" />
+      <option name="MAIN_CLASS_NAME" value="GrayUtils.TestGrayUtils" />
+      <option name="METHOD_NAME" value="testgrayColByPartAdapThreshold" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.TestBinaryUtils.testBinaryNative" />
+      <item itemvalue="JUnit.TestBinaryUtils.testBinaryzation" />
+      <item itemvalue="JUnit.TestBinaryUtils.testPartBinaryzation" />
+      <item itemvalue="JUnit.TestGrayUtils.testgrayColByAdapThreshold" />
+      <item itemvalue="JUnit.TestGrayUtils.testgrayColByPartAdapThreshold" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.TestBinaryUtils.testPartBinaryzation" />
+        <item itemvalue="JUnit.TestGrayUtils.testgrayColByAdapThreshold" />
+        <item itemvalue="JUnit.TestGrayUtils.testgrayColByPartAdapThreshold" />
+        <item itemvalue="JUnit.TestBinaryUtils.testBinaryNative" />
+        <item itemvalue="JUnit.TestBinaryUtils.testBinaryzation" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="edf66757-1fec-47e5-9157-25b3dd81f976" name="Default" comment="" />
+      <created>1537059123010</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1537059123010</updated>
+      <workItem from="1537059129603" duration="1208000" />
+      <workItem from="1537189978194" duration="643000" />
+      <workItem from="1537268476585" duration="658000" />
+      <workItem from="1538227405030" duration="1582000" />
+      <workItem from="1539681967652" duration="2413000" />
+      <workItem from="1539875896131" duration="679000" />
+      <workItem from="1540016471675" duration="83000" />
+      <workItem from="1540133017579" duration="1830000" />
+      <workItem from="1540195907232" duration="957000" />
+      <workItem from="1540292763693" duration="2753000" />
+      <workItem from="1540479301265" duration="368000" />
+      <workItem from="1540895003521" duration="1769000" />
+      <workItem from="1541043789662" duration="559000" />
+      <workItem from="1542624948351" duration="13763000" />
+      <workItem from="1542724400708" duration="19569000" />
+      <workItem from="1543229419026" duration="634000" />
+      <workItem from="1543317848930" duration="623000" />
+      <workItem from="1543495579908" duration="10000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="TestBinaryUtils_testBinaryzation - 2018.11.21 at 23h 01m 35s.xml">
+      <configuration name="TestBinaryUtils.testBinaryzation" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestBinaryUtils_testBinaryNative - 2018.11.21 at 23h 01m 45s.xml">
+      <configuration name="TestBinaryUtils.testBinaryNative" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestBinaryUtils_testPartBinaryzation - 2018.11.21 at 23h 02m 16s.xml">
+      <configuration name="TestBinaryUtils.testPartBinaryzation" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestBinaryUtils_testPartBinaryzation - 2018.11.21 at 23h 03m 04s.xml">
+      <configuration name="TestBinaryUtils.testPartBinaryzation" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestBinaryUtils_testPartBinaryzation - 2018.11.21 at 23h 04m 40s.xml">
+      <configuration name="TestBinaryUtils.testPartBinaryzation" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestGrayUtils_testgrayColByPartAdapThreshold - 2018.11.21 at 23h 13m 57s.xml">
+      <configuration name="TestGrayUtils.testgrayColByPartAdapThreshold" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestGrayUtils_testgrayColByAdapThreshold - 2018.11.21 at 23h 14m 11s.xml">
+      <configuration name="TestGrayUtils.testgrayColByAdapThreshold" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestBinaryUtils_testPartBinaryzation - 2018.11.21 at 23h 15m 31s.xml">
+      <configuration name="TestBinaryUtils.testPartBinaryzation" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestBinaryUtils_testPartBinaryzation - 2018.11.21 at 23h 16m 49s.xml">
+      <configuration name="TestBinaryUtils.testPartBinaryzation" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestBinaryUtils_testPartBinaryzation - 2018.11.21 at 23h 18m 58s.xml">
+      <configuration name="TestBinaryUtils.testPartBinaryzation" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="50101000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="5" />
+      <window_info anchor="bottom" id="TODO" order="11" />
+      <window_info anchor="right" id="Palette&#9;" order="1" />
+      <window_info id="Image Layers" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="7" weight="0.34818482" />
+      <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="1" weight="0.32838285" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="0" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.49751243" visible="true" weight="0.21406959" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info id="Structure" order="6" sideWeight="0.50248754" side_tool="true" weight="0.22314675" />
+      <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
+      <window_info id="UI Designer" order="1" />
+      <window_info anchor="right" id="Theme Preview" order="2" />
+      <window_info anchor="bottom" id="Debug" order="8" weight="0.39933994" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="4" weight="0.32838285" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="5" />
+      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="6" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="14" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestImageUtils.java" />
+    <entry file="file://$PROJECT_DIR$/Opencv/src/old/utils/HandleImgUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11552">
+          <caret line="608" column="66" selection-start-line="608" selection-start-column="66" selection-end-line="608" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/Opencv.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/bin/test/TestImageUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/bin/test/TestCorrect.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1330">
+          <caret line="82" column="5" lean-forward="true" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestOpencv.java" />
+    <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestHoughLines.java" />
+    <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestCorrect.java" />
+    <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestDistortion.java" />
+    <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestImageUtils.java" />
+    <entry file="jar://$PROJECT_DIR$/Opencv/src/lib/opencv-341.jar!/org/opencv/imgproc/Imgproc.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21831">
+          <caret line="1149" column="5" selection-start-line="1144" selection-start-column="4" selection-end-line="1149" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/reconsitution/ImgUtils.java" />
+    <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestReconsitution.java" />
+    <entry file="file://$PROJECT_DIR$/Opencv/src/rewrite/ImgUtils.java" />
+    <entry file="file://$PROJECT_DIR$/Opencv/src/rewrite/TestRewrite.java" />
+    <entry file="file://$PROJECT_DIR$/Opencv/src/reconsitution/ImgUtils2.java" />
+    <entry file="jar://G:/jdk/src.zip!/java/util/Comparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="108" column="17" selection-start-line="108" selection-start-column="17" selection-end-line="108" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://G:/jdk/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="475" column="19" selection-start-line="475" selection-start-column="19" selection-end-line="475" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/product/TestProduct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/MathUtils/MathUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1121">
+          <caret line="71" column="31" selection-start-line="71" selection-start-column="31" selection-end-line="71" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/old/test/TestReconsitution.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/old/test/TestImgUtils2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/old/test/TestImageUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1292">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/old/rewrite/TestRewrite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-608">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/old/reconsitution/ImgUtils2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-342">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/bin/product/TestProduct.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-285" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/old/test/TestCorrect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="148" column="13" lean-forward="true" selection-start-line="148" selection-start-column="13" selection-end-line="148" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="475">
+            <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/product/TestProduct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="12" column="5" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/GrayUtils/img/test3/test2/grayNative.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/GrayUtils/img/test3/test2/grayRowByKLargest.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/GrayUtils/img/test3/test2/grayRowByMidle.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/old/utils/ImageUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6266">
+          <caret line="494" column="16" selection-start-line="494" selection-start-column="16" selection-end-line="494" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/old/utils/HandleImgUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3766">
+          <caret line="124" column="26" selection-start-line="124" selection-start-column="26" selection-end-line="124" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/old/rewrite/ImgUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3979">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/old/reconsitution/ImgUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1349">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/GrayUtils/img/test3/test2/binaryNative.png" />
+    <entry file="file://$PROJECT_DIR$/Opencv/src/GrayUtils/img/test3/test2/binaryzation.png" />
+    <entry file="file://$PROJECT_DIR$/Opencv/src/GeneralUtils/GeneralUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="125" column="37" selection-start-line="125" selection-start-column="37" selection-end-line="125" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/img/test2/partBinaryzation.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2432">
+          <caret line="128" column="11" selection-start-line="128" selection-start-column="11" selection-end-line="128" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/img/test2/binaryzation.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/img/test2/binaryNative.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/BinaryUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="113" column="19" lean-forward="true" selection-start-line="113" selection-start-column="19" selection-end-line="113" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/GrayUtils/GrayUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="220" column="48" selection-start-line="220" selection-start-column="22" selection-end-line="220" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/GrayUtils/img/test3/test2/grayColByPartAdapThreshold.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/GrayUtils/img/test3/test2/grayColByAdapThreshold.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/GrayUtils/TestGrayUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="78" column="77" selection-start-line="78" selection-start-column="47" selection-end-line="78" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/GrayUtils/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="215">
+            <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/TestBinaryUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="247">
+            <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

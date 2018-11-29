@@ -1,29 +1,30 @@
-### javaÀûÓÃopencv´¦ÀíÍ¼Æ¬(»Ò¶È»¯¡¢¶şÖµ»¯¡¢½µÔë¡¢ÇĞ¸î¡¢¹éÒ»»¯)
+### javaåˆ©ç”¨opencvå¤„ç†å›¾ç‰‡(ç°åº¦åŒ–ã€äºŒå€¼åŒ–ã€é™å™ªã€åˆ‡å‰²ã€å½’ä¸€åŒ–)
 
-##### ±¾ÏîÄ¿Ö»ÊÇ×÷ÎªÒ»¸ö¹¤¾ßÀà£¬¶ÔÍ¼Ïñ(Ö÷ÒªÊÇ±í¸ñÖĞµÄÊÖĞ´Êı×Ö)½øĞĞÒ»ÏµÁĞµÄÔ¤´¦Àí£¬½»ÓÉTensorFlow½øĞĞÊ¶±ğ
+##### æœ¬é¡¹ç›®åªæ˜¯ä½œä¸ºä¸€ä¸ªå·¥å…·ç±»ï¼Œå¯¹å›¾åƒ(ä¸»è¦æ˜¯è¡¨æ ¼ä¸­çš„æ‰‹å†™æ•°å­—)è¿›è¡Œä¸€ç³»åˆ—çš„é¢„å¤„ç†ï¼Œäº¤ç”±TensorFlowè¿›è¡Œè¯†åˆ«
 
-##### »·¾³´î½¨[https://www.jianshu.com/p/cb1f44fa1522](https://www.jianshu.com/p/cb1f44fa1522)
+##### ç¯å¢ƒæ­å»º[https://www.jianshu.com/p/cb1f44fa1522](https://www.jianshu.com/p/cb1f44fa1522)
 
-##### java»ùÓÚopencvÊµÏÖÍ¼ÏñÊı×ÖÊ¶±ğ(¶ş)¡ª»ù±¾Á÷³Ì[https://www.jianshu.com/p/5359924b05ee](https://www.jianshu.com/p/5359924b05ee)
+##### javaåŸºäºopencvå®ç°å›¾åƒæ•°å­—è¯†åˆ«(äºŒ)â€”åŸºæœ¬æµç¨‹[https://www.jianshu.com/p/5359924b05ee](https://www.jianshu.com/p/5359924b05ee)
 
-##### Java»ùÓÚopencvÊµÏÖÍ¼ÏñÊı×ÖÊ¶±ğ(Èı)¡ª»Ò¶È»¯ºÍ¶şÖµ»¯[https://www.jianshu.com/p/8ec78f531d2c](https://www.jianshu.com/p/8ec78f531d2c)
+##### JavaåŸºäºopencvå®ç°å›¾åƒæ•°å­—è¯†åˆ«(ä¸‰)â€”ç°åº¦åŒ–å’ŒäºŒå€¼åŒ–[https://www.jianshu.com/p/8ec78f531d2c](https://www.jianshu.com/p/8ec78f531d2c)
 
-##### Java»ùÓÚopencvÊµÏÖÍ¼ÏñÊı×ÖÊ¶±ğ(ËÄ)¡ªÍ¼Ïñ½µÔë[https://www.jianshu.com/p/943e451cbb8a](https://www.jianshu.com/p/943e451cbb8a)
+##### JavaåŸºäºopencvå®ç°å›¾åƒæ•°å­—è¯†åˆ«(å››)â€”å›¾åƒé™å™ª[https://www.jianshu.com/p/943e451cbb8a](https://www.jianshu.com/p/943e451cbb8a)
 
-##### Java»ùÓÚopencvÊµÏÖÍ¼ÏñÊı×ÖÊ¶±ğ(Îå)¡ª¸¯Ê´¡¢ÅòÕÍ´¦Àí[https://www.jianshu.com/p/e28a1e938c28](https://www.jianshu.com/p/e28a1e938c28)
+##### JavaåŸºäºopencvå®ç°å›¾åƒæ•°å­—è¯†åˆ«(äº”)â€”è…èš€ã€è†¨èƒ€å¤„ç†[https://www.jianshu.com/p/e28a1e938c28](https://www.jianshu.com/p/e28a1e938c28)
 
-##### Java»ùÓÚopencvÊµÏÖÍ¼ÏñÊı×ÖÊ¶±ğ(Îå)¡ªÍ¶Ó°·¨·Ö¸î×Ö·û[https://www.jianshu.com/p/25ac6dac1408](https://www.jianshu.com/p/25ac6dac1408)
+##### JavaåŸºäºopencvå®ç°å›¾åƒæ•°å­—è¯†åˆ«(äº”)â€”æŠ•å½±æ³•åˆ†å‰²å­—ç¬¦[https://www.jianshu.com/p/25ac6dac1408](https://www.jianshu.com/p/25ac6dac1408)
 
-##### Java»ùÓÚopencvÊµÏÖÍ¼ÏñÊı×ÖÊ¶±ğ(Áù)¡ª¹éÒ»»¯[https://www.jianshu.com/p/cababfb990bd](https://www.jianshu.com/p/cababfb990bd)
-> Çå³ıÄÚÈİÖÜÎ§¶àÓàµÄ¿Õ°×£¬¹éÒ»»¯µ½ÏàÍ¬´óĞ¡
+##### JavaåŸºäºopencvå®ç°å›¾åƒæ•°å­—è¯†åˆ«(å…­)â€”å½’ä¸€åŒ–[https://www.jianshu.com/p/cababfb990bd](https://www.jianshu.com/p/cababfb990bd)
+> æ¸…é™¤å†…å®¹å‘¨å›´å¤šä½™çš„ç©ºç™½ï¼Œå½’ä¸€åŒ–åˆ°ç›¸åŒå¤§å°
 
-##### java»ùÓÚopencv½ÃÕıÍ¼Ïñ[https://www.jianshu.com/p/9eb9d6f6f837](https://www.jianshu.com/p/9eb9d6f6f837)
+##### javaåŸºäºopencvçŸ«æ­£å›¾åƒ[https://www.jianshu.com/p/9eb9d6f6f837](https://www.jianshu.com/p/9eb9d6f6f837)
 
-##### java»ùÓÚopencv½ÃÕı»û±äµÄÍ¼Ïñ
+##### javaåŸºäºopencvçŸ«æ­£ç•¸å˜çš„å›¾åƒ
 
-#### »¹ĞèÒª×öµÄÊÂÇé
+#### è¿˜éœ€è¦åšçš„äº‹æƒ…
 ```
-ºóÆÚµÄÇĞ¸îÒÔ¼°½ÃÕıËã·¨»á¸ù¾İÖ±Ïß¼ì²âÀ´×ö
+ps: å¯¹é¡¹ç›®è¿›è¡Œäº†æ‹†åˆ†
+åæœŸçš„åˆ‡å‰²ä»¥åŠçŸ«æ­£ç®—æ³•ä¼šæ ¹æ®ç›´çº¿æ£€æµ‹æ¥åš
 
 ```
 
