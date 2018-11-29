@@ -7,7 +7,8 @@
 
 `效果图`
 
-[opencv自带的二值化](binaryNative.png)
+[opencv自带的二值化](https://github.com/YLDarren/opencvHandleImg/blob/master/Opencv/src/BinaryUtils/img/test2/binaryNative.png)
 
-[csdn二值化](binaryzation.png)
+[全局二值化](https://github.com/YLDarren/opencvHandleImg/blob/master/Opencv/src/BinaryUtils/img/test2/binaryzation.png)
 
+[局部二值化](https://github.com/YLDarren/opencvHandleImg/blob/master/Opencv/src/BinaryUtils/img/test2/partBinaryzation.png)
