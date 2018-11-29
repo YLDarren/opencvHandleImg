@@ -29,8 +29,12 @@ floodFill就是把一个点x的所有相邻的点都涂上x点的颜色，一直
 影响了我们的有效数据，针对这种情况了我结合降噪做了一个递归填充，
 即每次只填充244块，给定一个标志[true/false]；true表示填充全部填充完，
 false表示无填充完，还需递归。而随之迎来的是如果你的有效数据的连通域如果大于244块，
-那将会产生递归循环，具体如何改进还未相出，先用一个计数器挡挡*
+那将会产生递归循环，具体如何改进还未想出，先用一个计数器挡挡(手动滑稽)*
 
-[8邻域降噪](connectedRemoveNoise.png)
+`8邻域降噪`
 
-[连通域降噪](eghitRemoveNoise.png)
+![8邻域降噪](https://github.com/YLDarren/opencvHandleImg/blob/master/Opencv/src/RemoveNoiseUtils/test2/connectedRemoveNoise.png)
+
+`连通域降噪`
+
+![连通域降噪](https://github.com/YLDarren/opencvHandleImg/blob/master/Opencv/src/RemoveNoiseUtils/test2/eghitRemoveNoise.png)
