@@ -193,56 +193,9 @@ public class BinaryUtils {
                     black_num++;
                 }
             }
-
-
         }
 
         return src;
-    }
-
-    /**
-     * 局部自适应寻找阀值
-     * 应该根据黑白比例寻找一个合适的阀值
-     * @param src
-     * @return
-     */
-    public static int getPartAdapThreshold(Mat src){
-        int threshold = 0, threshold_new = 127;
-        int nWhite_count, nBlack_count;
-        int nWhite_sum, nBlack_sum;
-        int value, i, j;
-        int width = GeneralUtils.getImgWidth(src), height = GeneralUtils.getImgHeight(src);
-
-        if(width == 0 || height == 0){
-            System.out.println("图像加载异常");
-            return -1;
-        }
-
-        while (threshold != threshold_new) {
-            nWhite_sum = nBlack_sum = 0;
-            nWhite_count = nBlack_count = 0;
-            for (j = 0; j < height; j++) {
-                for (i = 0; i < width; i++) {
-                    value = GeneralUtils.getPixel(src, j, i);
-                    if (value > threshold_new) {
-                        nWhite_count++;
-                        nWhite_sum += value;
-                    } else {
-                        nBlack_count++;
-                        nBlack_sum += value;
-                    }
-                }
-            }
-            threshold = threshold_new;
-            if(nWhite_count == 0 || nBlack_count == 0){
-                threshold_new = (nWhite_sum + nBlack_sum) / (nWhite_count + nBlack_count);
-            }else{
-                threshold_new = (nWhite_sum / nWhite_count + nBlack_sum / nBlack_count) / 2;
-            }
-
-        }
-
-        return threshold;
     }
 
 }
