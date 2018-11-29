@@ -20,12 +20,21 @@
 
 `效果图`
 
-[opencv自带的灰度化](grayNative.png)
+`opencv自带的灰度化`
+![opencv自带的灰度化](grayNative.png)
 
-[均值灰度化降噪](grayRowByMidle.png)
+`均值灰度化降噪`
 
-[k值灰度化降噪](grayRowByKLargest.png)
+![均值灰度化降噪](https://github.com/YLDarren/opencvHandleImg/blob/master/Opencv/src/GrayUtils/img/test3/test2/grayRowByMidle.png)
 
-[局部自适应灰度化降噪](grayColByPartAdapThreshold.png)
+`k值灰度化降噪`
 
-[全局自适应灰度化降噪](grayColByAdapThreshold.png)
+![k值灰度化降噪](https://github.com/YLDarren/opencvHandleImg/blob/master/Opencv/src/GrayUtils/img/test3/test2/grayRowByKLargest.png)
+
+`局部自适应灰度化降噪`
+
+![局部自适应灰度化降噪](https://github.com/YLDarren/opencvHandleImg/blob/master/Opencv/src/GrayUtils/img/test3/test2/grayColByPartAdapThreshold.png)
+
+`全局自适应灰度化降噪`
+
+![全局自适应灰度化降噪](https://github.com/YLDarren/opencvHandleImg/blob/master/Opencv/src/GrayUtils/img/test3/test2/grayColByAdapThreshold.png)
