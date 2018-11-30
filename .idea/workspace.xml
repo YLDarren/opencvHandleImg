@@ -17,35 +17,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ImgUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Opencv/src/old/rewrite/ImgUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="822">
-              <caret line="1585" column="18" lean-forward="true" selection-start-line="1585" selection-start-column="18" selection-end-line="1585" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WarpPerspectiveUtils.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Opencv/src/WarpPerspectiveUtils/WarpPerspectiveUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RotationUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Opencv/src/RotationUtils/RotationUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-14">
-              <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="227">
+                <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -100,7 +79,6 @@
         <option value="$PROJECT_DIR$/Opencv/src/old/test/TestImgUtils2.java" />
         <option value="$PROJECT_DIR$/Opencv/src/old/test/TestReconsitution.java" />
         <option value="$PROJECT_DIR$/Opencv/src/product/TestProduct.java" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/GrayUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/TestGrayUtils.java" />
@@ -116,6 +94,7 @@
         <option value="$PROJECT_DIR$/Opencv/src/ContoursUtils/ContoursUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/RotationUtils/RotationUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/WarpPerspectiveUtils/WarpPerspectiveUtils.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -408,7 +387,7 @@
       <workItem from="1543229419026" duration="634000" />
       <workItem from="1543317848930" duration="623000" />
       <workItem from="1543495579908" duration="4885000" />
-      <workItem from="1543555387167" duration="1567000" />
+      <workItem from="1543555387167" duration="2039000" />
     </task>
     <servers />
   </component>
@@ -445,7 +424,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56543000" />
+    <option name="totallyTimeSpent" value="57015000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -461,7 +440,7 @@
       <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="7" weight="0.34818482" />
       <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="1" weight="0.32838285" />
+      <window_info anchor="bottom" id="Terminal" order="1" visible="true" weight="0.32838285" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="0" />
       <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.49751243" visible="true" weight="0.21709532" />
@@ -577,16 +556,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="148" column="13" lean-forward="true" selection-start-line="148" selection-start-column="13" selection-end-line="148" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="475">
-            <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -787,13 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Opencv/src/old/rewrite/ImgUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="822">
-          <caret line="1585" column="18" lean-forward="true" selection-start-line="1585" selection-start-column="18" selection-end-line="1585" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Opencv/src/WarpPerspectiveUtils/WarpPerspectiveUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -801,6 +763,23 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/old/rewrite/ImgUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="822">
+          <caret line="1585" column="18" lean-forward="true" selection-start-line="1585" selection-start-column="18" selection-end-line="1585" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="227">
+            <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
