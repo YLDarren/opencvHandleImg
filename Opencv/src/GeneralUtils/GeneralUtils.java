@@ -183,6 +183,19 @@ public class GeneralUtils {
         return src;
     }
 
+    /**
+     * canny算法，边缘检测
+     *
+     * @param src
+     * @return
+     */
+    public static Mat canny(Mat src) {
+        Mat mat = src.clone();
+        Imgproc.Canny(src, mat, 60, 200);
+        return mat;
+    }
+
+
     public static int getBLACK() {
         return BLACK;
     }

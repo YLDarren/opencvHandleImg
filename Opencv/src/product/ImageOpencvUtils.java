@@ -846,6 +846,7 @@ public class ImageOpencvUtils {
 	 *            矩形
 	 * @return
 	 */
+
 	public static Mat rotation(Mat cannyMat, RotatedRect rect) {
 		// 获取矩形的四个顶点
 		Point[] rectPoint = new Point[4];

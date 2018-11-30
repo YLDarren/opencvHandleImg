@@ -16,20 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="227">
-                <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -53,6 +40,7 @@
       <find>resize</find>
       <find>Contours</find>
       <find>rotation</find>
+      <find>canny</find>
     </findStrings>
     <replaceStrings>
       <replace>C:\Users\X240\Desktop\opencv\x</replace>
@@ -79,7 +67,6 @@
         <option value="$PROJECT_DIR$/Opencv/src/old/test/TestImgUtils2.java" />
         <option value="$PROJECT_DIR$/Opencv/src/old/test/TestReconsitution.java" />
         <option value="$PROJECT_DIR$/Opencv/src/product/TestProduct.java" />
-        <option value="$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/GrayUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/TestGrayUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/README.md" />
@@ -89,12 +76,14 @@
         <option value="$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/TestRemoveNoiseUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/BinaryUtils/README.md" />
         <option value="$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/README.md" />
-        <option value="$PROJECT_DIR$/Opencv/src/GeneralUtils/GeneralUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/ResizeUtils/ResizeUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/ContoursUtils/ContoursUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/RotationUtils/RotationUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/WarpPerspectiveUtils/WarpPerspectiveUtils.java" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/GeneralUtils/GeneralUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/PaintUtils/PaintUtils.java" />
       </list>
     </option>
   </component>
@@ -143,7 +132,19 @@
               <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
               <item name="Opencv" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="WarpPerspectiveUtils" type="462c0819:PsiDirectoryNode" />
+              <item name="GeneralUtils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Opencv" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="PaintUtils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Opencv" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="product" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
@@ -387,7 +388,7 @@
       <workItem from="1543229419026" duration="634000" />
       <workItem from="1543317848930" duration="623000" />
       <workItem from="1543495579908" duration="4885000" />
-      <workItem from="1543555387167" duration="2039000" />
+      <workItem from="1543555387167" duration="2593000" />
     </task>
     <servers />
   </component>
@@ -424,11 +425,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57015000" />
+    <option name="totallyTimeSpent" value="57569000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="5" />
       <window_info anchor="bottom" id="TODO" order="11" />
@@ -440,7 +440,7 @@
       <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="7" weight="0.34818482" />
       <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="1" visible="true" weight="0.32838285" />
+      <window_info anchor="bottom" id="Terminal" order="1" weight="0.32838285" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="0" />
       <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.49751243" visible="true" weight="0.21709532" />
@@ -472,13 +472,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/Opencv/src/lib/opencv-341.jar!/org/opencv/imgproc/Imgproc.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21831">
-          <caret line="1149" column="5" selection-start-line="1144" selection-start-column="4" selection-end-line="1149" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Opencv/src/reconsitution/ImgUtils.java" />
     <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestReconsitution.java" />
     <entry file="file://$PROJECT_DIR$/Opencv/src/rewrite/ImgUtils.java" />
@@ -705,18 +698,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Opencv/src/GeneralUtils/GeneralUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="183" column="5" selection-start-line="183" selection-start-column="5" selection-end-line="183" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#494#495#0" expanded="true" />
-            <element signature="e#542#543#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Opencv/src/ResizeUtils/ResizeUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
@@ -726,13 +707,6 @@
             <element signature="e#300#301#0" expanded="true" />
             <element signature="e#326#327#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12778">
-          <caret line="974" column="5" lean-forward="true" selection-start-line="959" selection-start-column="4" selection-end-line="974" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -776,10 +750,37 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="227">
-            <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+          <first_editor relative-caret-position="208">
+            <caret line="24" column="34" lean-forward="true" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/GeneralUtils/GeneralUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="193" column="41" selection-start-line="193" selection-start-column="41" selection-end-line="193" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/PaintUtils/PaintUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="61" column="16" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="911" lean-forward="true" selection-start-line="899" selection-start-column="4" selection-end-line="911" />
         </state>
       </provider>
     </entry>
