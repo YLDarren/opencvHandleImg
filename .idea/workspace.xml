@@ -20,21 +20,19 @@
       <file leaf-file-name="ImageOpencvUtils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="1139" column="5" lean-forward="true" selection-start-line="1139" selection-start-column="5" selection-end-line="1139" selection-end-column="5" />
+            <state relative-caret-position="326">
+              <caret line="974" column="5" lean-forward="true" selection-start-line="959" selection-start-column="4" selection-end-line="974" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ResizeUtils.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Opencv/src/ResizeUtils/ResizeUtils.java">
+      <file leaf-file-name="ContoursUtils.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Opencv/src/ContoursUtils/ContoursUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+            <state relative-caret-position="518">
+              <caret line="79" column="4" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#300#301#0" expanded="true" />
-                <element signature="e#326#327#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -62,6 +60,7 @@
       <find>Row</find>
       <find>\\</find>
       <find>resize</find>
+      <find>Contours</find>
     </findStrings>
     <replaceStrings>
       <replace>C:\Users\X240\Desktop\opencv\x</replace>
@@ -101,6 +100,7 @@
         <option value="$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/README.md" />
         <option value="$PROJECT_DIR$/Opencv/src/GeneralUtils/GeneralUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/ResizeUtils/ResizeUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/ContoursUtils/ContoursUtils.java" />
       </list>
     </option>
   </component>
@@ -144,6 +144,12 @@
               <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
               <item name="Opencv" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Opencv" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ContoursUtils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
@@ -399,7 +405,7 @@
       <workItem from="1543229419026" duration="634000" />
       <workItem from="1543317848930" duration="623000" />
       <workItem from="1543495579908" duration="4885000" />
-      <workItem from="1543555387167" duration="330000" />
+      <workItem from="1543555387167" duration="501000" />
     </task>
     <servers />
   </component>
@@ -436,7 +442,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55306000" />
+    <option name="totallyTimeSpent" value="55477000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -484,7 +490,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestCorrect.java" />
     <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestDistortion.java" />
     <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestImageUtils.java" />
     <entry file="jar://$PROJECT_DIR$/Opencv/src/lib/opencv-341.jar!/org/opencv/imgproc/Imgproc.class">
@@ -746,13 +751,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="1139" column="5" lean-forward="true" selection-start-line="1139" selection-start-column="5" selection-end-line="1139" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Opencv/src/ResizeUtils/ResizeUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
@@ -761,6 +759,23 @@
             <element signature="imports" expanded="true" />
             <element signature="e#300#301#0" expanded="true" />
             <element signature="e#326#327#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="974" column="5" lean-forward="true" selection-start-line="959" selection-start-column="4" selection-end-line="974" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/ContoursUtils/ContoursUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="79" column="4" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
