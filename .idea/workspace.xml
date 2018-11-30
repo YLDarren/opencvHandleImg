@@ -20,46 +20,22 @@
       <file leaf-file-name="ImageOpencvUtils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="414" column="5" lean-forward="true" selection-start-line="414" selection-start-column="5" selection-end-line="414" selection-end-column="5" />
+            <state relative-caret-position="279">
+              <caret line="1139" column="5" lean-forward="true" selection-start-line="1139" selection-start-column="5" selection-end-line="1139" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RemoveNoiseUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/RemoveNoiseUtils.java">
+      <file leaf-file-name="ResizeUtils.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Opencv/src/ResizeUtils/ResizeUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="14" column="12" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="12" />
+            <state relative-caret-position="271">
+              <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4845#4846#0" expanded="true" />
-                <element signature="e#4880#4881#0" expanded="true" />
+                <element signature="e#300#301#0" expanded="true" />
+                <element signature="e#326#327#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestRemoveNoiseUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/TestRemoveNoiseUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="42" column="12" lean-forward="true" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="12" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="407">
-                <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
-              </first_editor>
-              <second_editor />
             </state>
           </provider>
         </entry>
@@ -82,10 +58,10 @@
       <find>findCon</find>
       <find>findCoon</find>
       <find>findCo</find>
-      <find>resize</find>
       <find>cut</find>
       <find>Row</find>
       <find>\\</find>
+      <find>resize</find>
     </findStrings>
     <replaceStrings>
       <replace>C:\Users\X240\Desktop\opencv\x</replace>
@@ -114,7 +90,6 @@
         <option value="$PROJECT_DIR$/Opencv/src/product/TestProduct.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java" />
-        <option value="$PROJECT_DIR$/Opencv/src/GeneralUtils/GeneralUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/GrayUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/TestGrayUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/README.md" />
@@ -124,6 +99,8 @@
         <option value="$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/TestRemoveNoiseUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/BinaryUtils/README.md" />
         <option value="$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/README.md" />
+        <option value="$PROJECT_DIR$/Opencv/src/GeneralUtils/GeneralUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/ResizeUtils/ResizeUtils.java" />
       </list>
     </option>
   </component>
@@ -155,9 +132,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -174,14 +149,13 @@
               <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
               <item name="Opencv" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RemoveNoiseUtils" type="462c0819:PsiDirectoryNode" />
+              <item name="product" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
               <item name="Opencv" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RemoveNoiseUtils" type="462c0819:PsiDirectoryNode" />
-              <item name="test2" type="462c0819:PsiDirectoryNode" />
+              <item name="ResizeUtils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
@@ -191,6 +165,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -422,7 +398,8 @@
       <workItem from="1542724400708" duration="19569000" />
       <workItem from="1543229419026" duration="634000" />
       <workItem from="1543317848930" duration="623000" />
-      <workItem from="1543495579908" duration="3543000" />
+      <workItem from="1543495579908" duration="4885000" />
+      <workItem from="1543555387167" duration="330000" />
     </task>
     <servers />
   </component>
@@ -459,7 +436,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53634000" />
+    <option name="totallyTimeSpent" value="55306000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -467,7 +444,6 @@
     <layout>
       <window_info anchor="right" id="Palette" order="5" />
       <window_info anchor="bottom" id="TODO" order="11" />
-      <window_info anchor="bottom" id="Messages" order="4" weight="0.32838285" />
       <window_info anchor="right" id="Palette&#9;" order="1" />
       <window_info id="Image Layers" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
@@ -479,7 +455,7 @@
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.32838285" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="0" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.49751243" visible="true" weight="0.21406959" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.49751243" visible="true" weight="0.21709532" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="6" sideWeight="0.50248754" side_tool="true" weight="0.22314675" />
       <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
@@ -493,6 +469,7 @@
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="6" />
+      <window_info anchor="bottom" id="Messages" order="4" weight="0.32838285" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +484,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestHoughLines.java" />
     <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestCorrect.java" />
     <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestDistortion.java" />
     <entry file="file://$PROJECT_DIR$/Opencv/src/test/TestImageUtils.java" />
@@ -654,9 +630,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Opencv/src/GrayUtils/img/test3/test2/binaryNative.png" />
     <entry file="file://$PROJECT_DIR$/Opencv/src/GrayUtils/img/test3/test2/binaryzation.png" />
-    <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/img/test2/partBinaryzation.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/img/test2/binaryzation.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -702,42 +675,10 @@
     <entry file="file://$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/test2/connectedRemoveNoise.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Opencv/src/GeneralUtils/GeneralUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="156" lean-forward="true" selection-start-line="156" selection-end-line="156" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#494#495#0" expanded="true" />
-            <element signature="e#542#543#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/TestBinaryUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="49" column="5" lean-forward="true" selection-start-line="33" selection-start-column="4" selection-end-line="49" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="414" column="5" lean-forward="true" selection-start-line="414" selection-start-column="5" selection-end-line="414" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/BinaryUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="194" column="13" selection-start-line="194" selection-start-column="13" selection-end-line="194" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -745,19 +686,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="42" column="12" lean-forward="true" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="171">
-            <caret line="9" selection-start-line="9" selection-end-line="12" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -780,6 +708,60 @@
             <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/img/test2/partBinaryzation.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/BinaryUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="542">
+          <caret line="194" column="13" selection-start-line="194" selection-start-column="13" selection-end-line="194" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/BinaryUtils/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="152">
+            <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/GeneralUtils/GeneralUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="183" column="5" selection-start-line="183" selection-start-column="5" selection-end-line="183" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#494#495#0" expanded="true" />
+            <element signature="e#542#543#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="1139" column="5" lean-forward="true" selection-start-line="1139" selection-start-column="5" selection-end-line="1139" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/ResizeUtils/ResizeUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#300#301#0" expanded="true" />
+            <element signature="e#326#327#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
