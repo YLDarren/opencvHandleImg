@@ -16,7 +16,17 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="RemoveNoiseUtils.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/RemoveNoiseUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="328">
+              <caret line="93" column="61" selection-start-line="93" selection-start-column="61" selection-end-line="93" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -36,11 +46,11 @@
       <find>findCo</find>
       <find>cut</find>
       <find>Row</find>
-      <find>\\</find>
       <find>resize</find>
       <find>Contours</find>
       <find>rotation</find>
       <find>canny</find>
+      <find>\\</find>
     </findStrings>
     <replaceStrings>
       <replace>C:\Users\X240\Desktop\opencv\x</replace>
@@ -66,13 +76,11 @@
         <option value="$PROJECT_DIR$/Opencv/src/MathUtils/MathUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/old/test/TestImgUtils2.java" />
         <option value="$PROJECT_DIR$/Opencv/src/old/test/TestReconsitution.java" />
-        <option value="$PROJECT_DIR$/Opencv/src/product/TestProduct.java" />
         <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/GrayUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/TestGrayUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/GrayUtils/README.md" />
         <option value="$PROJECT_DIR$/Opencv/src/BinaryUtils/TestBinaryUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/BinaryUtils/BinaryUtils.java" />
-        <option value="$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/RemoveNoiseUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/TestRemoveNoiseUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/BinaryUtils/README.md" />
         <option value="$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/README.md" />
@@ -84,6 +92,8 @@
         <option value="$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/GeneralUtils/GeneralUtils.java" />
         <option value="$PROJECT_DIR$/Opencv/src/PaintUtils/PaintUtils.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/product/TestProduct.java" />
+        <option value="$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/RemoveNoiseUtils.java" />
       </list>
     </option>
   </component>
@@ -115,7 +125,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -132,19 +144,7 @@
               <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
               <item name="Opencv" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="GeneralUtils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Opencv" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="PaintUtils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Opencv" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
+              <item name="RemoveNoiseUtils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="opencvHandleImg" type="b2602c69:ProjectViewProjectNode" />
@@ -154,8 +154,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -186,7 +184,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestRemoveNoiseUtils.testConnectedRemoveNoise">
+  <component name="RunManager" selected="JUnit.TestProduct.testResize">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
@@ -213,19 +211,19 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="TestGrayUtils.testgrayColByAdapThreshold" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestProduct.testCut" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Opencv" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="GrayUtils.*" />
+          <option name="PATTERN" value="product.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="GrayUtils" />
-      <option name="MAIN_CLASS_NAME" value="GrayUtils.TestGrayUtils" />
-      <option name="METHOD_NAME" value="testgrayColByAdapThreshold" />
+      <option name="PACKAGE_NAME" value="product" />
+      <option name="MAIN_CLASS_NAME" value="product.TestProduct" />
+      <option name="METHOD_NAME" value="testCut" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -236,19 +234,19 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="TestGrayUtils.testgrayColByPartAdapThreshold" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestProduct.testResize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Opencv" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="GrayUtils.*" />
+          <option name="PATTERN" value="product.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="GrayUtils" />
-      <option name="MAIN_CLASS_NAME" value="GrayUtils.TestGrayUtils" />
-      <option name="METHOD_NAME" value="testgrayColByPartAdapThreshold" />
+      <option name="PACKAGE_NAME" value="product" />
+      <option name="MAIN_CLASS_NAME" value="product.TestProduct" />
+      <option name="METHOD_NAME" value="testResize" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -345,18 +343,18 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.TestBinaryUtils.testPartBinaryzation" />
-      <item itemvalue="JUnit.TestGrayUtils.testgrayColByAdapThreshold" />
-      <item itemvalue="JUnit.TestGrayUtils.testgrayColByPartAdapThreshold" />
       <item itemvalue="JUnit.TestRemoveNoiseUtils.testEghitRemoveNoise" />
       <item itemvalue="JUnit.TestRemoveNoiseUtils.testConnectedRemoveNoise" />
+      <item itemvalue="JUnit.TestProduct.testCut" />
+      <item itemvalue="JUnit.TestProduct.testResize" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestProduct.testResize" />
+        <item itemvalue="JUnit.TestProduct.testCut" />
         <item itemvalue="JUnit.TestRemoveNoiseUtils.testConnectedRemoveNoise" />
         <item itemvalue="JUnit.TestRemoveNoiseUtils.testEghitRemoveNoise" />
         <item itemvalue="JUnit.TestBinaryUtils.testPartBinaryzation" />
-        <item itemvalue="JUnit.TestGrayUtils.testgrayColByAdapThreshold" />
-        <item itemvalue="JUnit.TestGrayUtils.testgrayColByPartAdapThreshold" />
       </list>
     </recent_temporary>
   </component>
@@ -388,47 +386,51 @@
       <workItem from="1543229419026" duration="634000" />
       <workItem from="1543317848930" duration="623000" />
       <workItem from="1543495579908" duration="4885000" />
-      <workItem from="1543555387167" duration="2593000" />
+      <workItem from="1543555387167" duration="3591000" />
+      <workItem from="1543575793168" duration="2441000" />
+      <workItem from="1543753752355" duration="626000" />
+      <workItem from="1543755554511" duration="99000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestBinaryUtils_testPartBinaryzation - 2018.11.21 at 23h 02m 16s.xml">
-      <configuration name="TestBinaryUtils.testPartBinaryzation" configurationId="JUnit" />
+    <history-entry file="TestProduct_testCut - 2018.11.30 at 19h 09m 28s.xml">
+      <configuration name="TestProduct.testCut" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestBinaryUtils_testPartBinaryzation - 2018.11.21 at 23h 03m 04s.xml">
-      <configuration name="TestBinaryUtils.testPartBinaryzation" configurationId="JUnit" />
+    <history-entry file="TestProduct_testCut - 2018.11.30 at 19h 09m 45s.xml">
+      <configuration name="TestProduct.testCut" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestBinaryUtils_testPartBinaryzation - 2018.11.21 at 23h 04m 40s.xml">
-      <configuration name="TestBinaryUtils.testPartBinaryzation" configurationId="JUnit" />
+    <history-entry file="TestProduct_testCut - 2018.11.30 at 19h 10m 24s.xml">
+      <configuration name="TestProduct.testCut" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestGrayUtils_testgrayColByPartAdapThreshold - 2018.11.21 at 23h 13m 57s.xml">
-      <configuration name="TestGrayUtils.testgrayColByPartAdapThreshold" configurationId="JUnit" />
+    <history-entry file="TestProduct_testCut - 2018.11.30 at 19h 10m 57s.xml">
+      <configuration name="TestProduct.testCut" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestGrayUtils_testgrayColByAdapThreshold - 2018.11.21 at 23h 14m 11s.xml">
-      <configuration name="TestGrayUtils.testgrayColByAdapThreshold" configurationId="JUnit" />
+    <history-entry file="TestProduct_testCut - 2018.11.30 at 19h 11m 31s.xml">
+      <configuration name="TestProduct.testCut" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestBinaryUtils_testPartBinaryzation - 2018.11.21 at 23h 15m 31s.xml">
-      <configuration name="TestBinaryUtils.testPartBinaryzation" configurationId="JUnit" />
+    <history-entry file="TestProduct_testCut - 2018.11.30 at 19h 11m 50s.xml">
+      <configuration name="TestProduct.testCut" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestBinaryUtils_testPartBinaryzation - 2018.11.21 at 23h 16m 49s.xml">
-      <configuration name="TestBinaryUtils.testPartBinaryzation" configurationId="JUnit" />
+    <history-entry file="TestProduct_testCut - 2018.11.30 at 19h 21m 17s.xml">
+      <configuration name="TestProduct.testCut" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestBinaryUtils_testPartBinaryzation - 2018.11.21 at 23h 18m 58s.xml">
-      <configuration name="TestBinaryUtils.testPartBinaryzation" configurationId="JUnit" />
+    <history-entry file="TestProduct_testCut - 2018.11.30 at 19h 26m 16s.xml">
+      <configuration name="TestProduct.testCut" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestRemoveNoiseUtils_testEghitRemoveNoise - 2018.11.29 at 21h 25m 16s.xml">
-      <configuration name="TestRemoveNoiseUtils.testEghitRemoveNoise" configurationId="JUnit" />
+    <history-entry file="TestProduct_testCut - 2018.11.30 at 19h 31m 09s.xml">
+      <configuration name="TestProduct.testCut" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestRemoveNoiseUtils_testConnectedRemoveNoise - 2018.11.29 at 21h 25m 27s.xml">
-      <configuration name="TestRemoveNoiseUtils.testConnectedRemoveNoise" configurationId="JUnit" />
+    <history-entry file="TestProduct_testResize - 2018.11.30 at 19h 34m 45s.xml">
+      <configuration name="TestProduct.testResize" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57569000" />
+    <option name="totallyTimeSpent" value="61733000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="5" />
       <window_info anchor="bottom" id="TODO" order="11" />
@@ -443,7 +445,7 @@
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.32838285" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="0" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.49751243" visible="true" weight="0.21709532" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.49751243" visible="true" weight="0.22617246" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="6" sideWeight="0.50248754" side_tool="true" weight="0.22314675" />
       <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
@@ -453,12 +455,42 @@
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="4" weight="0.32838285" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="6" />
-      <window_info anchor="bottom" id="Messages" order="4" weight="0.32838285" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" id="Palette" order="5" />
+      <window_info anchor="bottom" id="Find" order="6" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="0" />
+      <window_info anchor="bottom" id="Run" order="7" weight="0.34818482" />
+      <window_info anchor="right" id="Theme Preview" order="2" />
+      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
+      <window_info id="Structure" order="6" sideWeight="0.50248754" side_tool="true" weight="0.22314675" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="11" />
+      <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
+      <window_info id="Image Layers" order="4" />
+      <window_info id="Designer" order="0" />
+      <window_info id="UI Designer" order="1" />
+      <window_info anchor="bottom" id="Debug" order="8" weight="0.39933994" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="1" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="1" visible="true" weight="0.32838285" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
+      <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info anchor="bottom" id="Message" order="5" />
+      <window_info anchor="bottom" id="Messages" order="4" weight="0.32838285" />
+      <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.49751243" visible="true" weight="0.21709532" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -552,13 +584,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Opencv/src/product/TestProduct.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="12" column="5" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="12" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Opencv/src/GrayUtils/img/test3/test2/grayNative.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -640,9 +665,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="49" column="5" lean-forward="true" selection-start-line="33" selection-start-column="4" selection-end-line="49" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -650,18 +672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="42" column="12" lean-forward="true" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/RemoveNoiseUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="14" column="12" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4845#4846#0" expanded="true" />
-            <element signature="e#4880#4881#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -682,9 +692,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="542">
           <caret line="194" column="13" selection-start-line="194" selection-start-column="13" selection-end-line="194" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -702,11 +709,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
           <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#300#301#0" expanded="true" />
-            <element signature="e#326#327#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -724,9 +726,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-14">
           <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -734,9 +733,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -779,8 +775,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Opencv/src/product/ImageOpencvUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="911" lean-forward="true" selection-start-line="899" selection-start-column="4" selection-end-line="911" />
+        <state relative-caret-position="190">
+          <caret line="1006" column="22" selection-start-line="1006" selection-start-column="22" selection-end-line="1006" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/product/TestProduct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/RemoveNoiseUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="93" column="61" selection-start-line="93" selection-start-column="61" selection-end-line="93" selection-end-column="61" />
         </state>
       </provider>
     </entry>

@@ -83,7 +83,7 @@ public class RemoveNoiseUtils {
         for (i = 0; i < width; i++) {
             for (j = 0; j < height; j++) {
                 int nValue = GeneralUtils.getPixel(src, j, i);
-                if (nValue != 255) {
+                if (nValue != 0 && nValue != 255) {
                     colorCount[nValue - 1]++;
                 }
             }
@@ -91,7 +91,7 @@ public class RemoveNoiseUtils {
         // 去除噪点
         for (i = 0; i < width; i++) {
             for (j = 0; j < height; j++) {
-                if (colorCount[GeneralUtils.getPixel(src, j, i) - 1] <= pArea) {
+                if (GeneralUtils.getPixel(src, j, i) != 0 && colorCount[GeneralUtils.getPixel(src, j, i) - 1] <= pArea) {
                     GeneralUtils.setPixel(src, j, i, GeneralUtils.getWHITE());
                 }
             }
