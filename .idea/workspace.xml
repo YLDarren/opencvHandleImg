@@ -20,8 +20,11 @@
       <file leaf-file-name="RemoveNoiseUtils.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/RemoveNoiseUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="93" column="61" selection-start-line="93" selection-start-column="61" selection-end-line="93" selection-end-column="61" />
+            <state relative-caret-position="456">
+              <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -389,7 +392,7 @@
       <workItem from="1543555387167" duration="3591000" />
       <workItem from="1543575793168" duration="2441000" />
       <workItem from="1543753752355" duration="626000" />
-      <workItem from="1543755554511" duration="99000" />
+      <workItem from="1543755554511" duration="859000" />
     </task>
     <servers />
   </component>
@@ -426,7 +429,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61733000" />
+    <option name="totallyTimeSpent" value="62493000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -442,7 +445,7 @@
       <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="7" weight="0.34818482" />
       <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="1" weight="0.32838285" />
+      <window_info anchor="bottom" id="Terminal" order="1" visible="true" weight="0.32838285" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="0" />
       <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.49751243" visible="true" weight="0.22617246" />
@@ -789,8 +792,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Opencv/src/RemoveNoiseUtils/RemoveNoiseUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="93" column="61" selection-start-line="93" selection-start-column="61" selection-end-line="93" selection-end-column="61" />
+        <state relative-caret-position="456">
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

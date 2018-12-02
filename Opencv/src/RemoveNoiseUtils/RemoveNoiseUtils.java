@@ -75,27 +75,8 @@ public class RemoveNoiseUtils {
         int i, j, color = 1;
         int width = GeneralUtils.getImgWidth(src), height = GeneralUtils.getImgHeight(src);
 
-        Result result = floodFill(new Result(src));
+        Result result = floodFill(new Result(src) , pArea);
         src = result.mat;
-
-        // 统计不同颜色点的个数
-        int[] colorCount = new int[255];
-        for (i = 0; i < width; i++) {
-            for (j = 0; j < height; j++) {
-                int nValue = GeneralUtils.getPixel(src, j, i);
-                if (nValue != 0 && nValue != 255) {
-                    colorCount[nValue - 1]++;
-                }
-            }
-        }
-        // 去除噪点
-        for (i = 0; i < width; i++) {
-            for (j = 0; j < height; j++) {
-                if (GeneralUtils.getPixel(src, j, i) != 0 && colorCount[GeneralUtils.getPixel(src, j, i) - 1] <= pArea) {
-                    GeneralUtils.setPixel(src, j, i, GeneralUtils.getWHITE());
-                }
-            }
-        }
 
         // 二值化
         for (i = 0; i < width; i++) {
@@ -119,7 +100,7 @@ public class RemoveNoiseUtils {
      * @param result
      * @return
      */
-    public static Result floodFill(Result result){
+    public static Result floodFill(Result result , double pArea){
         Mat src = result.mat;
         if(src == null){
             return null;
@@ -132,8 +113,12 @@ public class RemoveNoiseUtils {
                 if (GeneralUtils.getPixel(src, j, i) == GeneralUtils.getBLACK()) {
                     // 用不同的颜色填充连接区域中的每个黑色点
                     // floodFill就是把与点(i , j)的所有相连通的区域都涂上color颜色
-                    Imgproc.floodFill(src, new Mat(), new Point(i, j), new Scalar(color));
-                    color++;
+                    int area = Imgproc.floodFill(src, new Mat(), new Point(i, j), new Scalar(color));
+                    if(area <= pArea) {
+                        Imgproc.floodFill(src, new Mat(), new Point(i, j), new Scalar(255));
+                    }else{
+                        color++;
+                    }
                     if(color == 255){
                         result.status = false;//连通域还没填充完
                         result.mat = src;
@@ -146,6 +131,70 @@ public class RemoveNoiseUtils {
         result.mat = src;
         result.status = true;//表示所有的连通域都已填充完毕
         return result;
+    }
+
+    /**
+     * 连通域填充颜色
+     * @param src
+     * @return
+     */
+    public static Mat floodFill(Mat src ,double pArea){
+        if(src == null){
+            return null;
+        }
+        int i, j, color = 1;
+        int width = GeneralUtils.getImgWidth(src), height = GeneralUtils.getImgHeight(src);
+
+        for (i = 0; i < width; i++) {
+            for (j = 0; j < height; j++) {
+                if (GeneralUtils.getPixel(src, j, i) == GeneralUtils.getBLACK()) {
+                    // 用不同的颜色填充连接区域中的每个黑色点
+                    // floodFill就是把与点(i , j)的所有相连通的区域都涂上color颜色
+                    int area = Imgproc.floodFill(src, new Mat(), new Point(i, j), new Scalar(color));
+                    if(area <= pArea) {
+                        System.out.println(color);
+                        Imgproc.floodFill(src, new Mat(), new Point(i, j), new Scalar(255));
+                    }else {
+                        color++;
+                    }
+                    System.out.println(color);
+                }
+            }
+        }
+        return src;
+    }
+
+
+    //只填充最大的连通域
+    public static Mat findMaxConnected(Mat src){
+        int i, j, color = 127;
+        int width = GeneralUtils.getImgWidth(src), height = GeneralUtils.getImgHeight(src);
+        int maxArea = Integer.MAX_VALUE;
+        int maxI = -1 , maxJ = -1;
+        for (i = 0; i < width; i++) {
+            for (j = 0; j < height; j++) {
+                if (GeneralUtils.getPixel(src, j, i) == GeneralUtils.getBLACK()) {
+                    // 用不同的颜色填充连接区域中的每个黑色点
+                    // floodFill就是把与点(i , j)的所有相连通的区域都涂上color颜色
+                    int area = Imgproc.floodFill(src, new Mat(), new Point(i, j), new Scalar(color));
+                    if(maxI != -1 && maxJ != -1){
+                        if(area > maxArea){
+                            maxArea = area;
+                            Imgproc.floodFill(src, new Mat(), new Point(maxI, maxJ), new Scalar(255));
+                            maxI = i;
+                            maxJ = j;
+                        }else{
+                            Imgproc.floodFill(src, new Mat(), new Point(i, j), new Scalar(255));
+                        }
+                    }else{
+                        maxI = i;
+                        maxJ = j;
+                        maxArea = area;
+                    }
+                }
+            }
+        }
+        return src;
     }
 
     private static class Result{
