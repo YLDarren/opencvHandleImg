@@ -21,6 +21,10 @@
 
 ##### java基于opencv矫正畸变的图像
 
+##### Centos7编译opencv3.4.1[https://www.jianshu.com/p/5498f31d0ffd](https://www.jianshu.com/p/5498f31d0ffd)
+
+##### 搭建opencv javaweb项目[https://www.jianshu.com/p/446b86cbd41d](https://www.jianshu.com/p/446b86cbd41d)
+
 > 已经对一些通用的函数都进行了拆分，灰度化二值化做的很挺好的，主要是一个博主阀值找的比较好，
 在这里表示感谢；还有一些并不是通用的函数，就没有对他们进行拆分。opencv中还有很多可以学的，
 bilibili上有很多opencv的课，涉及到很多方面，非常好。人生苦短...
